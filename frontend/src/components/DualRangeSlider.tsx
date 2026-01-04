@@ -28,6 +28,13 @@ export function DualRangeSlider({
 
     // Handle drag
     // If steps provided, map value to index; else standard linear
+    const snapToStep = (val: number, isIndex: boolean = false) => {
+        if (!steps) return Math.round(val / step) * step;
+        // Val is percentage 0-1 mapped to indices 0..steps.length-1
+        // Wait, logic differs. If steps, min/max are indices. 
+        return Math.round(val);
+    };
+
     const handleDrag = useCallback(
         (e: MouseEvent | TouchEvent, thumb: "min" | "max") => {
             if (!trackRef.current) return;
@@ -52,6 +59,10 @@ export function DualRangeSlider({
             }
 
             if (thumb === "min") {
+                const limit = steps ? maxVal - 1 : maxVal - step;
+                // For steps, maxVal is index. limit is previous index.
+                // Actually comparison: minVal and maxVal are values passed in. 
+                // If steps are used, Parent passes INDICES.
                 const val = Math.min(newValue, maxVal - (steps ? 1 : step));
                 onChange(val, maxVal);
             } else {
@@ -144,7 +155,7 @@ export function DualRangeSlider({
             {/* Permanent Labels */}
             {steps && (
                 <div className="absolute w-full top-9 text-xs text-gray-400 font-medium select-none pointer-events-none">
-                    {steps.map((_, index) => {
+                    {steps.map((val, index) => {
                         // Skip some labels if too crowded? User asked for "numbers to also show all the time"
                         // 12 items might be crowded. Let's try showing all but small font.
                         // Or show alternate if crowded? Let's show all first.

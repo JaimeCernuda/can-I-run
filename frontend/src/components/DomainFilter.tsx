@@ -50,7 +50,7 @@ export function DomainFilter({
           onClick={selectAll}
           className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${selectedDomains.length === 0
             ? "bg-blue-100 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-300"
-            : "border-gray-600 text-gray-400 dark:text-gray-300 hover:border-gray-500 hover:text-gray-200"
+            : "border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500"
             }`}
         >
           All
@@ -67,7 +67,7 @@ export function DomainFilter({
               onClick={() => toggleDomain(option.value)}
               className={`px-3 py-1.5 text-sm rounded-full border transition-colors ${isSelected
                 ? "bg-blue-100 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-300"
-                : "border-gray-600 text-gray-400 dark:text-gray-300 hover:border-gray-500 hover:text-gray-200"
+                : "border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-gray-400 dark:hover:border-gray-500"
                 }`}
             >
               <span className="mr-1">{option.icon}</span>

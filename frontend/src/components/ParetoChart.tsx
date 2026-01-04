@@ -167,36 +167,36 @@ export function ParetoChart({
     const data = payload[0].payload as ChartPoint & { isPareto: boolean };
 
     return (
-      <div className="bg-gray-900/80 p-3 rounded-lg shadow-lg border border-gray-700 max-w-xs backdrop-blur-sm">
-        <div className="font-medium text-gray-100">
+      <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 max-w-xs">
+        <div className="font-medium text-gray-900 dark:text-gray-100">
           {data.model_name}
         </div>
-        <div className="text-sm text-gray-400">
+        <div className="text-sm text-gray-500 dark:text-gray-400">
           {data.quant_name} ({data.bits_per_weight.toFixed(1)} bits)
         </div>
 
         <div className="mt-2 space-y-1 text-sm">
           <div className="flex justify-between">
-            <span className="text-gray-400">VRAM:</span>
-            <span className="font-medium text-gray-200">
+            <span className="text-gray-600 dark:text-gray-400">VRAM:</span>
+            <span className="font-medium text-gray-900 dark:text-gray-100">
               {formatVRAM(data.vram_required)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-400">Quality:</span>
-            <span className="font-medium text-gray-200">
+            <span className="text-gray-600 dark:text-gray-400">Quality:</span>
+            <span className="font-medium text-gray-900 dark:text-gray-100">
               {data.quality_score.toFixed(1)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-400">Speed:</span>
-            <span className="font-medium text-gray-200">
+            <span className="text-gray-600 dark:text-gray-400">Speed:</span>
+            <span className="font-medium text-gray-900 dark:text-gray-100">
               {formatTPS(data.tokens_per_second)}
             </span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-400">Efficiency:</span>
-            <span className="font-medium text-gray-200">
+            <span className="text-gray-600 dark:text-gray-400">Efficiency:</span>
+            <span className="font-medium text-gray-900 dark:text-gray-100">
               {data.efficiency_score.toFixed(2)}
             </span>
           </div>
@@ -204,17 +204,17 @@ export function ParetoChart({
 
         <div className="mt-2 flex flex-wrap gap-1">
           {data.is_moe && (
-            <span className="px-1.5 py-0.5 bg-purple-900/50 text-purple-300 text-xs rounded border border-purple-700">
+            <span className="px-1.5 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs rounded">
               MoE
             </span>
           )}
           {data.is_tool_calling && (
-            <span className="px-1.5 py-0.5 bg-green-900/50 text-green-300 text-xs rounded border border-green-700">
+            <span className="px-1.5 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded">
               Tool-Calling
             </span>
           )}
           {data.isPareto && (
-            <span className="px-1.5 py-0.5 bg-blue-900/50 text-blue-300 text-xs rounded border border-blue-700">
+            <span className="px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded">
               Pareto Optimal
             </span>
           )}
@@ -224,27 +224,25 @@ export function ParetoChart({
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
-      <h3 className="text-sm font-medium text-gray-200 mb-2">
+    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+      <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
         {config.title}
       </h3>
 
       <ResponsiveContainer width="100%" height={300}>
         <ScatterChart margin={{ top: 10, right: 10, bottom: 20, left: 40 }}>
-          <CartesianGrid strokeDasharray="3 3" opacity={0.1} stroke="#fff" />
+          <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
           <XAxis
             type="number"
             dataKey="x"
             name="VRAM"
             domain={[0, maxVram]}
             tickFormatter={(v) => `${v}GB`}
-            stroke="#9ca3af"
-            tick={{ fill: "#9ca3af" }}
             label={{
               value: "VRAM (GB)",
               position: "bottom",
               offset: 0,
-              style: { fontSize: 12, fill: "#9ca3af" },
+              style: { fontSize: 12, fill: "#6b7280" },
             }}
           />
           <YAxis
@@ -252,14 +250,12 @@ export function ParetoChart({
             dataKey="y"
             name={config.yLabel}
             tickFormatter={(v) => config.formatY(v)}
-            stroke="#9ca3af"
-            tick={{ fill: "#9ca3af" }}
             label={{
               value: config.yLabel,
               angle: -90,
               position: "left",
               offset: 10,
-              style: { fontSize: 12, fill: "#9ca3af" },
+              style: { fontSize: 12, fill: "#6b7280" },
             }}
           />
           <Tooltip content={<CustomTooltip />} />
