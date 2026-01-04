@@ -1,0 +1,750 @@
+{
+  "_comment": "Model registry with benchmarks and specifications. Sources: HuggingFace, Unsloth, Open LLM Leaderboard",
+  "models": [
+    {
+      "name": "Llama-3.3-70B-Instruct",
+      "total_params_b": 70.6,
+      "active_params_b": 70.6,
+      "is_moe": false,
+      "hidden_dim": 8192,
+      "num_layers": 80,
+      "num_heads": 64,
+      "num_kv_heads": 8,
+      "vocab_size": 128256,
+      "max_context_length": 131072,
+      "effective_context_length": 131072,
+      "domains": ["general", "code", "tool-calling", "math"],
+      "capabilities": ["function_calling", "json_mode", "long_context", "reasoning"],
+      "benchmarks": {
+        "mmlu": 86.0,
+        "humaneval": 88.4,
+        "gsm8k": 95.1,
+        "bfcl": 84.1
+      },
+      "notes": "Meta's flagship model with excellent all-around performance"
+    },
+    {
+      "name": "Llama-3.1-70B-Instruct",
+      "total_params_b": 70.6,
+      "active_params_b": 70.6,
+      "is_moe": false,
+      "hidden_dim": 8192,
+      "num_layers": 80,
+      "num_heads": 64,
+      "num_kv_heads": 8,
+      "vocab_size": 128256,
+      "max_context_length": 131072,
+      "effective_context_length": 131072,
+      "domains": ["general", "code", "math"],
+      "capabilities": ["function_calling", "json_mode", "long_context", "reasoning"],
+      "benchmarks": {
+        "mmlu": 82.0,
+        "humaneval": 80.5,
+        "gsm8k": 93.0
+      },
+      "notes": "Warning: Unusual quantization sensitivity due to weight outliers"
+    },
+    {
+      "name": "Llama-3.1-8B-Instruct",
+      "total_params_b": 8.03,
+      "active_params_b": 8.03,
+      "is_moe": false,
+      "hidden_dim": 4096,
+      "num_layers": 32,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 128256,
+      "max_context_length": 131072,
+      "effective_context_length": 131072,
+      "domains": ["general", "code"],
+      "capabilities": ["function_calling", "json_mode", "long_context"],
+      "benchmarks": {
+        "mmlu": 68.1,
+        "humaneval": 62.5,
+        "gsm8k": 75.0
+      }
+    },
+    {
+      "name": "Llama-3.2-3B-Instruct",
+      "total_params_b": 3.21,
+      "active_params_b": 3.21,
+      "is_moe": false,
+      "hidden_dim": 3072,
+      "num_layers": 28,
+      "num_heads": 24,
+      "num_kv_heads": 8,
+      "vocab_size": 128256,
+      "max_context_length": 131072,
+      "effective_context_length": 8192,
+      "domains": ["general"],
+      "capabilities": [],
+      "benchmarks": {
+        "mmlu": 55.0,
+        "humaneval": 40.0,
+        "gsm8k": 48.0
+      }
+    },
+    {
+      "name": "Llama-3.2-1B-Instruct",
+      "total_params_b": 1.24,
+      "active_params_b": 1.24,
+      "is_moe": false,
+      "hidden_dim": 2048,
+      "num_layers": 16,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 128256,
+      "max_context_length": 131072,
+      "effective_context_length": 8192,
+      "domains": ["general"],
+      "capabilities": [],
+      "benchmarks": {
+        "mmlu": 42.0,
+        "humaneval": 28.0,
+        "gsm8k": 32.0
+      }
+    },
+    {
+      "name": "Qwen3-235B-A22B",
+      "total_params_b": 235.0,
+      "active_params_b": 22.0,
+      "is_moe": true,
+      "num_experts": 128,
+      "num_active_experts": 8,
+      "hidden_dim": 4096,
+      "num_layers": 94,
+      "num_heads": 64,
+      "num_kv_heads": 4,
+      "vocab_size": 151936,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "code", "math", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode", "long_context", "reasoning"],
+      "benchmarks": {
+        "mmlu": 85.0,
+        "humaneval": 85.0,
+        "gsm8k": 92.0,
+        "bfcl": 82.0
+      }
+    },
+    {
+      "name": "Qwen3-32B",
+      "total_params_b": 32.5,
+      "active_params_b": 32.5,
+      "is_moe": false,
+      "hidden_dim": 5120,
+      "num_layers": 64,
+      "num_heads": 40,
+      "num_kv_heads": 8,
+      "vocab_size": 151936,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "code", "math"],
+      "capabilities": ["function_calling", "json_mode", "long_context", "reasoning"],
+      "benchmarks": {
+        "mmlu": 81.0,
+        "humaneval": 80.0,
+        "gsm8k": 90.0
+      }
+    },
+    {
+      "name": "Qwen3-14B",
+      "total_params_b": 14.0,
+      "active_params_b": 14.0,
+      "is_moe": false,
+      "hidden_dim": 5120,
+      "num_layers": 40,
+      "num_heads": 40,
+      "num_kv_heads": 8,
+      "vocab_size": 151936,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "code"],
+      "capabilities": ["function_calling", "json_mode", "long_context"],
+      "benchmarks": {
+        "mmlu": 74.0,
+        "humaneval": 72.0,
+        "gsm8k": 80.0
+      }
+    },
+    {
+      "name": "Qwen3-8B",
+      "total_params_b": 8.0,
+      "active_params_b": 8.0,
+      "is_moe": false,
+      "hidden_dim": 4096,
+      "num_layers": 36,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 151936,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "code"],
+      "capabilities": ["function_calling", "json_mode", "long_context"],
+      "benchmarks": {
+        "mmlu": 68.0,
+        "humaneval": 65.0,
+        "gsm8k": 72.0
+      }
+    },
+    {
+      "name": "Qwen3-4B",
+      "total_params_b": 4.0,
+      "active_params_b": 4.0,
+      "is_moe": false,
+      "hidden_dim": 2560,
+      "num_layers": 36,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 151936,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general"],
+      "capabilities": ["function_calling", "json_mode"],
+      "benchmarks": {
+        "mmlu": 58.0,
+        "humaneval": 52.0,
+        "gsm8k": 60.0
+      }
+    },
+    {
+      "name": "Qwen3-30B-A3B",
+      "total_params_b": 30.5,
+      "active_params_b": 3.0,
+      "is_moe": true,
+      "num_experts": 128,
+      "num_active_experts": 8,
+      "hidden_dim": 2048,
+      "num_layers": 48,
+      "num_heads": 16,
+      "num_kv_heads": 4,
+      "vocab_size": 151936,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general"],
+      "capabilities": ["long_context"],
+      "benchmarks": {
+        "mmlu": 65.0,
+        "humaneval": 58.0,
+        "gsm8k": 70.0
+      }
+    },
+    {
+      "name": "Qwen2.5-72B-Instruct",
+      "total_params_b": 72.7,
+      "active_params_b": 72.7,
+      "is_moe": false,
+      "hidden_dim": 8192,
+      "num_layers": 80,
+      "num_heads": 64,
+      "num_kv_heads": 8,
+      "vocab_size": 152064,
+      "max_context_length": 131072,
+      "effective_context_length": 65536,
+      "domains": ["general", "code", "math"],
+      "capabilities": ["function_calling", "json_mode", "long_context", "multilingual"],
+      "benchmarks": {
+        "mmlu": 85.0,
+        "humaneval": 86.0,
+        "gsm8k": 92.0
+      }
+    },
+    {
+      "name": "Qwen2.5-32B-Instruct",
+      "total_params_b": 32.5,
+      "active_params_b": 32.5,
+      "is_moe": false,
+      "hidden_dim": 5120,
+      "num_layers": 64,
+      "num_heads": 40,
+      "num_kv_heads": 8,
+      "vocab_size": 152064,
+      "max_context_length": 131072,
+      "effective_context_length": 65536,
+      "domains": ["general", "code", "math"],
+      "capabilities": ["function_calling", "json_mode", "long_context", "multilingual"],
+      "benchmarks": {
+        "mmlu": 79.0,
+        "humaneval": 75.0,
+        "gsm8k": 88.0
+      }
+    },
+    {
+      "name": "Qwen2.5-Coder-32B-Instruct",
+      "total_params_b": 32.5,
+      "active_params_b": 32.5,
+      "is_moe": false,
+      "hidden_dim": 5120,
+      "num_layers": 64,
+      "num_heads": 40,
+      "num_kv_heads": 8,
+      "vocab_size": 152064,
+      "max_context_length": 131072,
+      "effective_context_length": 65536,
+      "domains": ["code", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode", "long_context"],
+      "benchmarks": {
+        "mmlu": 75.0,
+        "humaneval": 92.7,
+        "gsm8k": 80.0,
+        "bfcl": 78.5
+      }
+    },
+    {
+      "name": "Qwen2.5-Coder-14B-Instruct",
+      "total_params_b": 14.7,
+      "active_params_b": 14.7,
+      "is_moe": false,
+      "hidden_dim": 5120,
+      "num_layers": 48,
+      "num_heads": 40,
+      "num_kv_heads": 8,
+      "vocab_size": 152064,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["code", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode"],
+      "benchmarks": {
+        "mmlu": 68.0,
+        "humaneval": 85.0,
+        "gsm8k": 70.0,
+        "bfcl": 72.0
+      }
+    },
+    {
+      "name": "Qwen2.5-Coder-7B-Instruct",
+      "total_params_b": 7.6,
+      "active_params_b": 7.6,
+      "is_moe": false,
+      "hidden_dim": 3584,
+      "num_layers": 28,
+      "num_heads": 28,
+      "num_kv_heads": 4,
+      "vocab_size": 152064,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["code"],
+      "capabilities": ["function_calling", "json_mode"],
+      "benchmarks": {
+        "mmlu": 58.0,
+        "humaneval": 75.0,
+        "gsm8k": 55.0
+      }
+    },
+    {
+      "name": "DeepSeek-V3",
+      "total_params_b": 671.0,
+      "active_params_b": 37.0,
+      "is_moe": true,
+      "num_experts": 256,
+      "num_active_experts": 8,
+      "hidden_dim": 7168,
+      "num_layers": 61,
+      "num_heads": 128,
+      "num_kv_heads": 128,
+      "vocab_size": 129280,
+      "max_context_length": 131072,
+      "effective_context_length": 65536,
+      "domains": ["general", "code", "math", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode", "long_context", "reasoning"],
+      "benchmarks": {
+        "mmlu": 87.1,
+        "humaneval": 82.6,
+        "gsm8k": 95.0,
+        "bfcl": 79.3
+      },
+      "notes": "MoE - 671B total but only 37B active per token"
+    },
+    {
+      "name": "DeepSeek-R1-Distill-Qwen-32B",
+      "total_params_b": 32.5,
+      "active_params_b": 32.5,
+      "is_moe": false,
+      "hidden_dim": 5120,
+      "num_layers": 64,
+      "num_heads": 40,
+      "num_kv_heads": 8,
+      "vocab_size": 152064,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "math"],
+      "capabilities": ["reasoning"],
+      "benchmarks": {
+        "mmlu": 80.0,
+        "humaneval": 75.0,
+        "gsm8k": 93.0
+      }
+    },
+    {
+      "name": "DeepSeek-R1-Distill-Llama-70B",
+      "total_params_b": 70.6,
+      "active_params_b": 70.6,
+      "is_moe": false,
+      "hidden_dim": 8192,
+      "num_layers": 80,
+      "num_heads": 64,
+      "num_kv_heads": 8,
+      "vocab_size": 128256,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "math"],
+      "capabilities": ["reasoning"],
+      "benchmarks": {
+        "mmlu": 86.0,
+        "humaneval": 82.0,
+        "gsm8k": 96.0
+      }
+    },
+    {
+      "name": "Gemma-3-27B-IT",
+      "total_params_b": 27.4,
+      "active_params_b": 27.4,
+      "is_moe": false,
+      "hidden_dim": 4608,
+      "num_layers": 62,
+      "num_heads": 32,
+      "num_kv_heads": 16,
+      "vocab_size": 262144,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode", "vision"],
+      "benchmarks": {
+        "mmlu": 75.6,
+        "humaneval": 70.0,
+        "gsm8k": 82.0,
+        "bfcl": 82.3
+      }
+    },
+    {
+      "name": "Gemma-3-12B-IT",
+      "total_params_b": 12.0,
+      "active_params_b": 12.0,
+      "is_moe": false,
+      "hidden_dim": 3840,
+      "num_layers": 40,
+      "num_heads": 16,
+      "num_kv_heads": 8,
+      "vocab_size": 262144,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode", "vision"],
+      "benchmarks": {
+        "mmlu": 68.0,
+        "humaneval": 60.0,
+        "gsm8k": 72.0,
+        "bfcl": 75.0
+      }
+    },
+    {
+      "name": "Gemma-3-4B-IT",
+      "total_params_b": 4.3,
+      "active_params_b": 4.3,
+      "is_moe": false,
+      "hidden_dim": 2560,
+      "num_layers": 34,
+      "num_heads": 8,
+      "num_kv_heads": 4,
+      "vocab_size": 262144,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general"],
+      "capabilities": ["vision"],
+      "benchmarks": {
+        "mmlu": 58.0,
+        "humaneval": 45.0,
+        "gsm8k": 55.0
+      }
+    },
+    {
+      "name": "Gemma-2-27B-IT",
+      "total_params_b": 27.2,
+      "active_params_b": 27.2,
+      "is_moe": false,
+      "hidden_dim": 4608,
+      "num_layers": 46,
+      "num_heads": 32,
+      "num_kv_heads": 16,
+      "vocab_size": 256128,
+      "max_context_length": 8192,
+      "effective_context_length": 8192,
+      "domains": ["general"],
+      "capabilities": [],
+      "benchmarks": {
+        "mmlu": 75.2,
+        "humaneval": 65.0,
+        "gsm8k": 74.0
+      }
+    },
+    {
+      "name": "Gemma-2-9B-IT",
+      "total_params_b": 9.24,
+      "active_params_b": 9.24,
+      "is_moe": false,
+      "hidden_dim": 3584,
+      "num_layers": 42,
+      "num_heads": 16,
+      "num_kv_heads": 8,
+      "vocab_size": 256128,
+      "max_context_length": 8192,
+      "effective_context_length": 8192,
+      "domains": ["general"],
+      "capabilities": [],
+      "benchmarks": {
+        "mmlu": 70.0,
+        "humaneval": 54.0,
+        "gsm8k": 68.0
+      }
+    },
+    {
+      "name": "Mistral-Small-24B-Instruct-2501",
+      "total_params_b": 24.0,
+      "active_params_b": 24.0,
+      "is_moe": false,
+      "hidden_dim": 5120,
+      "num_layers": 56,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 131072,
+      "max_context_length": 32768,
+      "effective_context_length": 32768,
+      "domains": ["general", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode"],
+      "benchmarks": {
+        "mmlu": 72.0,
+        "humaneval": 68.0,
+        "gsm8k": 78.0,
+        "bfcl": 76.8
+      }
+    },
+    {
+      "name": "Mistral-Nemo-12B-Instruct",
+      "total_params_b": 12.2,
+      "active_params_b": 12.2,
+      "is_moe": false,
+      "hidden_dim": 5120,
+      "num_layers": 40,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 131072,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general"],
+      "capabilities": ["function_calling", "json_mode", "long_context"],
+      "benchmarks": {
+        "mmlu": 68.0,
+        "humaneval": 58.0,
+        "gsm8k": 65.0
+      }
+    },
+    {
+      "name": "Mistral-7B-Instruct-v0.3",
+      "total_params_b": 7.24,
+      "active_params_b": 7.24,
+      "is_moe": false,
+      "hidden_dim": 4096,
+      "num_layers": 32,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 32768,
+      "max_context_length": 32768,
+      "effective_context_length": 32768,
+      "domains": ["general"],
+      "capabilities": ["function_calling"],
+      "benchmarks": {
+        "mmlu": 62.5,
+        "humaneval": 48.0,
+        "gsm8k": 56.0
+      }
+    },
+    {
+      "name": "Mixtral-8x7B-Instruct",
+      "total_params_b": 46.7,
+      "active_params_b": 12.9,
+      "is_moe": true,
+      "num_experts": 8,
+      "num_active_experts": 2,
+      "hidden_dim": 4096,
+      "num_layers": 32,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 32000,
+      "max_context_length": 32768,
+      "effective_context_length": 32768,
+      "domains": ["general", "code"],
+      "capabilities": ["function_calling"],
+      "benchmarks": {
+        "mmlu": 70.6,
+        "humaneval": 65.0,
+        "gsm8k": 74.0
+      }
+    },
+    {
+      "name": "Mixtral-8x22B-Instruct",
+      "total_params_b": 141.0,
+      "active_params_b": 39.1,
+      "is_moe": true,
+      "num_experts": 8,
+      "num_active_experts": 2,
+      "hidden_dim": 6144,
+      "num_layers": 56,
+      "num_heads": 48,
+      "num_kv_heads": 8,
+      "vocab_size": 32000,
+      "max_context_length": 65536,
+      "effective_context_length": 65536,
+      "domains": ["general", "code", "math"],
+      "capabilities": ["function_calling", "long_context"],
+      "benchmarks": {
+        "mmlu": 77.8,
+        "humaneval": 72.0,
+        "gsm8k": 82.0
+      }
+    },
+    {
+      "name": "Phi-4",
+      "total_params_b": 14.0,
+      "active_params_b": 14.0,
+      "is_moe": false,
+      "hidden_dim": 4096,
+      "num_layers": 40,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 100352,
+      "max_context_length": 16384,
+      "effective_context_length": 16384,
+      "domains": ["general", "code", "math"],
+      "capabilities": ["reasoning"],
+      "benchmarks": {
+        "mmlu": 78.0,
+        "humaneval": 80.0,
+        "gsm8k": 89.0
+      }
+    },
+    {
+      "name": "Phi-3-medium-14B-Instruct",
+      "total_params_b": 14.0,
+      "active_params_b": 14.0,
+      "is_moe": false,
+      "hidden_dim": 5120,
+      "num_layers": 40,
+      "num_heads": 40,
+      "num_kv_heads": 10,
+      "vocab_size": 32064,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "code"],
+      "capabilities": ["long_context"],
+      "benchmarks": {
+        "mmlu": 72.0,
+        "humaneval": 65.0,
+        "gsm8k": 78.0
+      }
+    },
+    {
+      "name": "Phi-3-mini-4K-Instruct",
+      "total_params_b": 3.82,
+      "active_params_b": 3.82,
+      "is_moe": false,
+      "hidden_dim": 3072,
+      "num_layers": 32,
+      "num_heads": 32,
+      "num_kv_heads": 32,
+      "vocab_size": 32064,
+      "max_context_length": 4096,
+      "effective_context_length": 4096,
+      "domains": ["general"],
+      "capabilities": [],
+      "benchmarks": {
+        "mmlu": 68.0,
+        "humaneval": 55.0,
+        "gsm8k": 75.0
+      }
+    },
+    {
+      "name": "Command-R+",
+      "total_params_b": 104.0,
+      "active_params_b": 104.0,
+      "is_moe": false,
+      "hidden_dim": 12288,
+      "num_layers": 64,
+      "num_heads": 96,
+      "num_kv_heads": 8,
+      "vocab_size": 256000,
+      "max_context_length": 131072,
+      "effective_context_length": 131072,
+      "domains": ["general", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode", "long_context", "multilingual"],
+      "benchmarks": {
+        "mmlu": 75.0,
+        "humaneval": 62.0,
+        "gsm8k": 70.0,
+        "bfcl": 80.0
+      }
+    },
+    {
+      "name": "Command-R",
+      "total_params_b": 35.0,
+      "active_params_b": 35.0,
+      "is_moe": false,
+      "hidden_dim": 8192,
+      "num_layers": 40,
+      "num_heads": 64,
+      "num_kv_heads": 8,
+      "vocab_size": 256000,
+      "max_context_length": 131072,
+      "effective_context_length": 131072,
+      "domains": ["general", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode", "long_context", "multilingual"],
+      "benchmarks": {
+        "mmlu": 68.0,
+        "humaneval": 52.0,
+        "gsm8k": 55.0,
+        "bfcl": 72.0
+      }
+    },
+    {
+      "name": "Hermes-3-Llama-3.1-8B",
+      "total_params_b": 8.03,
+      "active_params_b": 8.03,
+      "is_moe": false,
+      "hidden_dim": 4096,
+      "num_layers": 32,
+      "num_heads": 32,
+      "num_kv_heads": 8,
+      "vocab_size": 128256,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode", "long_context"],
+      "benchmarks": {
+        "mmlu": 66.0,
+        "humaneval": 55.0,
+        "gsm8k": 70.0,
+        "bfcl": 71.2
+      }
+    },
+    {
+      "name": "Hermes-3-Llama-3.1-70B",
+      "total_params_b": 70.6,
+      "active_params_b": 70.6,
+      "is_moe": false,
+      "hidden_dim": 8192,
+      "num_layers": 80,
+      "num_heads": 64,
+      "num_kv_heads": 8,
+      "vocab_size": 128256,
+      "max_context_length": 131072,
+      "effective_context_length": 32768,
+      "domains": ["general", "tool-calling"],
+      "capabilities": ["function_calling", "json_mode", "long_context"],
+      "benchmarks": {
+        "mmlu": 80.0,
+        "humaneval": 75.0,
+        "gsm8k": 88.0,
+        "bfcl": 80.0
+      }
+    }
+  ]
+}

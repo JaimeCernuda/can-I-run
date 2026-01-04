@@ -1,0 +1,165 @@
+{
+  "_comment": "Quantization specifications with quality factors. Sources: llama.cpp quantize README, Intel Low-bit Leaderboard, Unsloth Dynamic 2.0",
+  "quantizations": [
+    {
+      "name": "F16",
+      "bits_per_weight": 16.0,
+      "quality_factor": 1.0,
+      "ppl_increase": 0.0,
+      "quality_tier": "near_lossless",
+      "source": "Baseline (no quantization)"
+    },
+    {
+      "name": "Q8_0",
+      "bits_per_weight": 8.5,
+      "quality_factor": 0.999,
+      "ppl_increase": 0.0026,
+      "quality_tier": "near_lossless",
+      "source": "llama.cpp quantize README - LLaMA-3-8B"
+    },
+    {
+      "name": "Q6_K",
+      "bits_per_weight": 6.57,
+      "quality_factor": 0.996,
+      "ppl_increase": 0.0217,
+      "quality_tier": "very_low_loss",
+      "source": "llama.cpp quantize README - LLaMA-3-8B"
+    },
+    {
+      "name": "Q5_K_M",
+      "bits_per_weight": 5.67,
+      "quality_factor": 0.99,
+      "ppl_increase": 0.0569,
+      "quality_tier": "recommended",
+      "source": "llama.cpp quantize README - LLaMA-3-8B"
+    },
+    {
+      "name": "Q5_K_S",
+      "bits_per_weight": 5.53,
+      "quality_factor": 0.983,
+      "ppl_increase": 0.1049,
+      "quality_tier": "balanced",
+      "source": "llama.cpp quantize README - LLaMA-3-8B"
+    },
+    {
+      "name": "Q4_K_M",
+      "bits_per_weight": 4.83,
+      "quality_factor": 0.991,
+      "ppl_increase": 0.0535,
+      "quality_tier": "recommended",
+      "source": "llama.cpp quantize README - Sweet spot for most users"
+    },
+    {
+      "name": "Q4_K_S",
+      "bits_per_weight": 4.58,
+      "quality_factor": 0.987,
+      "ppl_increase": 0.0796,
+      "quality_tier": "balanced",
+      "source": "llama.cpp quantize README - LLaMA-3-8B"
+    },
+    {
+      "name": "Q4_0",
+      "bits_per_weight": 4.34,
+      "quality_factor": 0.925,
+      "ppl_increase": 0.4685,
+      "quality_tier": "noticeable_loss",
+      "source": "llama.cpp quantize README - Legacy format"
+    },
+    {
+      "name": "Q3_K_M",
+      "bits_per_weight": 3.89,
+      "quality_factor": 0.96,
+      "ppl_increase": 0.2437,
+      "quality_tier": "noticeable_loss",
+      "source": "llama.cpp quantize README - LLaMA-3-8B"
+    },
+    {
+      "name": "Q3_K_S",
+      "bits_per_weight": 3.5,
+      "quality_factor": 0.89,
+      "ppl_increase": 0.6569,
+      "quality_tier": "high_loss",
+      "source": "llama.cpp quantize README - LLaMA-3-8B"
+    },
+    {
+      "name": "Q2_K",
+      "bits_per_weight": 3.0,
+      "quality_factor": 0.87,
+      "ppl_increase": 0.8698,
+      "quality_tier": "high_loss",
+      "source": "llama.cpp quantize README - LLaMA-3-8B"
+    },
+    {
+      "name": "IQ4_XS",
+      "bits_per_weight": 4.25,
+      "quality_factor": 0.985,
+      "ppl_increase": 0.09,
+      "quality_tier": "balanced",
+      "source": "llama.cpp importance quantization"
+    },
+    {
+      "name": "IQ3_M",
+      "bits_per_weight": 3.44,
+      "quality_factor": 0.94,
+      "ppl_increase": 0.35,
+      "quality_tier": "noticeable_loss",
+      "source": "llama.cpp importance quantization"
+    },
+    {
+      "name": "IQ3_S",
+      "bits_per_weight": 3.25,
+      "quality_factor": 0.92,
+      "ppl_increase": 0.45,
+      "quality_tier": "noticeable_loss",
+      "source": "llama.cpp importance quantization"
+    },
+    {
+      "name": "IQ2_M",
+      "bits_per_weight": 2.7,
+      "quality_factor": 0.82,
+      "ppl_increase": 1.2,
+      "quality_tier": "high_loss",
+      "source": "llama.cpp importance quantization"
+    },
+    {
+      "name": "IQ2_S",
+      "bits_per_weight": 2.5,
+      "quality_factor": 0.78,
+      "ppl_increase": 1.8,
+      "quality_tier": "extreme_loss",
+      "source": "llama.cpp importance quantization"
+    },
+    {
+      "name": "IQ2_XS",
+      "bits_per_weight": 2.3,
+      "quality_factor": 0.75,
+      "ppl_increase": 2.5,
+      "quality_tier": "extreme_loss",
+      "source": "llama.cpp importance quantization"
+    },
+    {
+      "name": "IQ2_XXS",
+      "bits_per_weight": 2.1,
+      "quality_factor": 0.7,
+      "ppl_increase": 3.52,
+      "quality_tier": "extreme_loss",
+      "source": "llama.cpp quantize README - LLaMA-3-8B"
+    },
+    {
+      "name": "IQ1_M",
+      "bits_per_weight": 1.75,
+      "quality_factor": 0.5,
+      "ppl_increase": 8.0,
+      "quality_tier": "extreme_loss",
+      "source": "llama.cpp importance quantization - Extreme compression"
+    },
+    {
+      "name": "IQ1_S",
+      "bits_per_weight": 1.5,
+      "quality_factor": 0.4,
+      "ppl_increase": 12.0,
+      "quality_tier": "extreme_loss",
+      "source": "llama.cpp importance quantization - Extreme compression"
+    }
+  ]
+}
