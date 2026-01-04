@@ -81,8 +81,8 @@ const About: React.FC<{ onBack: () => void }> = ({ onBack }) => {
                             </div>
                             <ul className="text-xs text-slate-500 mt-2 grid grid-cols-2 gap-1">
                                 <li>$L$: Layers</li>
-                                <li>$H_{kv}$: KV Heads</li>
-                                <li>$D_{head}$: Head Dimension</li>
+                                <li>{'$H_{kv}$'}: KV Heads</li>
+                                <li>{'$D_{head}$'}: Head Dimension</li>
                                 <li>$C$: Context Length</li>
                             </ul>
                         </div>
