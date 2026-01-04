@@ -4,14 +4,15 @@
  * Main application component that orchestrates the UI and state management.
  */
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useDeferredValue } from "react";
 import { GPUSelector } from "./components/GPUSelector";
 import { ContextSlider } from "./components/ContextSlider";
+import { DualRangeSlider } from "./components/DualRangeSlider";
 import { DomainFilter } from "./components/DomainFilter";
 import { VRAMBreakdown } from "./components/VRAMBreakdown";
 import { LinkedCharts } from "./components/LinkedCharts";
 import { ModelCard } from "./components/ModelCard";
-import { HowItWorks } from "./components/HowItWorks";
+import About from "./components/About";
 import {
   createChartPoints,
   computeParetoPoints,
@@ -30,16 +31,23 @@ const data = computedData as {
   metadata: { total_gpus: number; total_models: number; total_quants: number; total_combos: number; overhead_gb: number };
 };
 
+const MODEL_SIZE_POINTS = [0, 0.5, 1, 3, 7, 14, 30, 70, 150, 300, 405, 700];
+
 export default function App() {
+  const [view, setView] = useState<'home' | 'about'>('home');
   // GPU selection state
   const [selectedGpu, setSelectedGpu] = useState<GPU | null>(null);
   const [customVram, setCustomVram] = useState<number | null>(null);
 
   // Context length state
   const [contextIndex, setContextIndex] = useState(2); // Default to 8K (index 2)
+  const deferredContextIndex = useDeferredValue(contextIndex);
 
   // Domain filter state
   const [selectedDomains, setSelectedDomains] = useState<ModelDomain[]>([]);
+
+  // Model Parameter filter state (Indices of MODEL_SIZE_POINTS)
+  const [paramRangeIndices, setParamRangeIndices] = useState<{ min: number; max: number }>({ min: 0, max: MODEL_SIZE_POINTS.length - 1 });
 
   // Selected models for comparison
   const [selectedModelIds, setSelectedModelIds] = useState<Set<string>>(new Set());
@@ -47,7 +55,7 @@ export default function App() {
   // Derived values
   const totalVram = selectedGpu?.vram_gb ?? customVram ?? 0;
   const gpuName = selectedGpu?.name ?? "Custom GPU";
-  const contextLength = data.context_positions[contextIndex]?.value ?? 8192;
+  const contextLength = data.context_positions[deferredContextIndex]?.value ?? 8192;
 
   // Create chart points with all calculations
   const chartPoints = useMemo(() => {
@@ -61,11 +69,20 @@ export default function App() {
     );
 
     // Filter by domain
-    const filteredPoints = filterByDomain(points, selectedDomains);
+    let filteredPoints = filterByDomain(points, selectedDomains);
+
+    // Filter by params using stepped points
+    const minParams = MODEL_SIZE_POINTS[paramRangeIndices.min];
+    const maxParams = MODEL_SIZE_POINTS[paramRangeIndices.max];
+
+    filteredPoints = filteredPoints.filter(p =>
+      p.total_params_b >= minParams &&
+      (paramRangeIndices.max === MODEL_SIZE_POINTS.length - 1 ? true : p.total_params_b <= maxParams)
+    );
 
     // Compute Pareto frontiers and filter to fitting models
     return computeParetoPoints(filteredPoints, totalVram);
-  }, [totalVram, selectedGpu, contextLength, selectedDomains]);
+  }, [totalVram, selectedGpu, contextLength, selectedDomains, paramRangeIndices]);
 
   // Get VRAM breakdown for selected model (first Pareto-optimal model if any)
   const selectedPoint = chartPoints.find(p => p.is_pareto_quality) ?? chartPoints[0];
@@ -101,7 +118,6 @@ export default function App() {
       "tool-calling": 0,
       math: 0,
       vision: 0,
-      roleplay: 0,
     };
 
     for (const point of chartPoints) {
@@ -126,22 +142,34 @@ export default function App() {
     });
   };
 
+  if (view === 'about') {
+    return (
+      <div className="min-h-screen bg-[linear-gradient(135deg,#0a0a0f_0%,#1a1a2e_50%,#0f0f1a_100%)] text-gray-200 font-mono">
+        <About onBack={() => setView('home')} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[linear-gradient(135deg,#0a0a0f_0%,#1a1a2e_50%,#0f0f1a_100%)] text-gray-200 font-mono">
       {/* Header */}
-      {/* Header */}
       <header className="border-b border-gray-800 bg-[#0a0a0f]/50 backdrop-blur-md sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <h1 className="text-2xl font-bold flex items-center gap-3">
-            <span className="text-transparent bg-clip-text bg-gradient-to-br from-amber-400 to-red-500">◆</span>
-            <span className="text-gray-100">Model ↔ Quant Selector</span>
-            <span className="text-[0.7rem] px-2 py-1 bg-amber-500/10 border border-amber-500/30 rounded text-amber-500 tracking-wider">
-              UNSLOTH
-            </span>
-          </h1>
-          <p className="text-sm text-gray-400 mt-1 ml-7">
-            Find the optimal model size × quantization for your GPU and context needs
-          </p>
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold flex items-center gap-3">
+              <span className="text-transparent bg-clip-text bg-gradient-to-br from-amber-400 to-red-500">◆</span>
+              <span className="text-gray-100">Model ↔ Quant Selector</span>
+            </h1>
+            <p className="text-sm text-gray-400 mt-1 ml-7">
+              Find the optimal model size × quantization for your GPU and context needs
+            </p>
+          </div>
+          <button
+            onClick={() => setView('about')}
+            className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors border border-blue-500/30 px-3 py-1.5 rounded-lg hover:bg-blue-500/10"
+          >
+            How It Works / Data
+          </button>
         </div>
       </header>
 
@@ -179,6 +207,33 @@ export default function App() {
             modelCounts={domainCounts}
           />
 
+          {/* Model Params Filter */}
+          <div>
+            <div className="flex justify-between text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <span>Model Size</span>
+              <span className="text-blue-600 dark:text-blue-400">
+                {MODEL_SIZE_POINTS[paramRangeIndices.min]}B - {
+                  paramRangeIndices.max === MODEL_SIZE_POINTS.length - 1
+                    ? "Any"
+                    : `${MODEL_SIZE_POINTS[paramRangeIndices.max]}B`
+                }
+              </span>
+            </div>
+            <DualRangeSlider
+              min={0}
+              max={MODEL_SIZE_POINTS.length - 1}
+              step={1}
+              minVal={paramRangeIndices.min}
+              maxVal={paramRangeIndices.max}
+              onChange={(min, max) => setParamRangeIndices({ min, max })}
+              formatLabel={(val) => {
+                const size = MODEL_SIZE_POINTS[val];
+                return size >= 700 ? "Max" : `${size}B`;
+              }}
+              steps={MODEL_SIZE_POINTS}
+            />
+          </div>
+
           {totalVram > 0 && (
             <div className="text-sm text-gray-600 dark:text-gray-400">
               Available for model:{" "}
@@ -192,9 +247,6 @@ export default function App() {
             </div>
           )}
         </section>
-
-        {/* How It Works */}
-        <HowItWorks />
 
         {/* Charts Section */}
         {totalVram > 0 ? (
@@ -253,21 +305,9 @@ export default function App() {
 
         {/* Footer */}
         <footer className="text-center text-sm text-gray-500 dark:text-gray-400 py-4 border-t border-gray-200 dark:border-gray-700">
-          <p>
-            Data sources: llama.cpp, TechPowerUp, HuggingFace, Open LLM
-            Leaderboard
-          </p>
-          <p className="mt-1">
-            Built with React, Tailwind CSS, and Recharts |{" "}
-            <a
-              href="https://github.com"
-              className="text-blue-500 hover:underline"
-            >
-              View on GitHub
-            </a>
-          </p>
+
         </footer>
       </main>
-    </div>
+    </div >
   );
 }

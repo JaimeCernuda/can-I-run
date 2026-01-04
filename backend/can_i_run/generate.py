@@ -199,8 +199,9 @@ def generate_full_dataset(
     ]
 
     # Context positions for slider
+    from .kv_cache import format_context_length
     context_positions = [
-        {"value": pos, "label": f"{pos // 1024}K" if pos >= 1024 else str(pos)}
+        {"value": pos, "label": format_context_length(pos)}
         for pos in CONTEXT_POSITIONS
     ]
 

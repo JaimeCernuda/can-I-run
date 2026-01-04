@@ -43,6 +43,7 @@ CONTEXT_POSITIONS = [
     262144,   # 256K
     524288,   # 512K
     1048576,  # 1M
+    2097152,  # 2M
 ]
 
 
@@ -153,9 +154,17 @@ def format_context_length(tokens: int) -> str:
         Human-readable string (e.g., "8K", "128K", "1M")
     """
     if tokens >= 1_000_000:
-        return f"{tokens // 1_000_000}M"
+        val = tokens / 1_000_000
+        # If it's close to integer, strip decimal
+        return f"{int(val)}M" if val.is_integer() else f"{val:.1f}M"
     elif tokens >= 1_000:
-        return f"{tokens // 1_000}K"
+        val = tokens / 1_000
+        # Check if it should be displayed as M (e.g. 1000K -> 1M, 2048K -> 2M is wrong logic, wait. 1024K should be 1M approx? No, 1M tokens is 1M. 1048576 is 1M power of 2)
+        # The user complained about "1024K". 
+        # 1048576 / 1000 = 1048.576 K -> "1048K" or "1M"?
+        # Let's handle power of 2 "M" specifically if needed, but the current logic divides by 1,000,000.
+        # 1048576 / 1,000,000 = 1.04... -> 1.0M.
+        return f"{int(val)}K"
     else:
         return str(tokens)
 

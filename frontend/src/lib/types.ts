@@ -32,8 +32,8 @@ export type ModelDomain =
   | "code"
   | "tool-calling"
   | "math"
-  | "vision"
-  | "roleplay";
+  | "math"
+  | "vision";
 
 export type ModelCapability =
   | "function_calling"
@@ -97,6 +97,7 @@ export interface ChartPoint {
   domains: ModelDomain[];
   max_context: number;
   bits_per_weight: number;
+  total_params_b: number;
 }
 
 export interface VRAMBreakdown {

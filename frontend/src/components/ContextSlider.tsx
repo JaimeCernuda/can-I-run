@@ -5,7 +5,7 @@
  * Shows warnings when KV cache is too large or exceeds model limits.
  */
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type { ContextPosition } from "../lib/types";
 
 interface ContextSliderProps {
@@ -27,7 +27,23 @@ export function ContextSlider({
   totalVramGb,
   onIndexChange,
 }: ContextSliderProps) {
-  const selectedPosition = positions[selectedIndex];
+  // Internal state for dragging
+  const [localIndex, setLocalIndex] = useState(selectedIndex);
+  const [isDragging, setIsDragging] = useState(false);
+
+  // Sync local index with prop when not dragging
+  if (selectedIndex !== localIndex && !isDragging) {
+    setLocalIndex(selectedIndex);
+  }
+
+  const handlePointerUp = () => {
+    setIsDragging(false);
+    if (localIndex !== selectedIndex) {
+      onIndexChange(localIndex);
+    }
+  };
+
+  const selectedPosition = positions[localIndex];
   const selectedValue = selectedPosition?.value ?? 8192;
 
   // Check context warnings
@@ -35,6 +51,9 @@ export function ContextSlider({
     const result: string[] = [];
 
     // Check if KV cache is too large
+    // Note: kvCacheGb is from the parent based on COMMITTED index. 
+    // We could try to estimate it here but it's complex. 
+    // User requested "on release" updates so stale KV cache during drag is acceptable.
     const kvCachePercent = totalVramGb > 0 ? (kvCacheGb / totalVramGb) * 100 : 0;
     if (kvCachePercent > 50) {
       result.push(
@@ -88,27 +107,44 @@ export function ContextSlider({
           type="range"
           min={0}
           max={positions.length - 1}
-          value={selectedIndex}
-          onChange={(e) => onIndexChange(parseInt(e.target.value))}
+          value={localIndex}
+          onChange={(e) => {
+            setLocalIndex(parseInt(e.target.value));
+            setIsDragging(true);
+          }}
+          onMouseUp={handlePointerUp}
+          onTouchEnd={handlePointerUp}
           className="w-full"
         />
 
-        {/* Position markers */}
-        <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
-          {positions.map((pos, idx) => (
-            <span
-              key={pos.value}
-              className={`${
-                positionStates[idx] === "unavailable"
-                  ? "text-gray-300 dark:text-gray-600"
-                  : positionStates[idx] === "warning"
-                    ? "text-amber-500"
-                    : ""
-              } ${idx === selectedIndex ? "font-bold text-blue-600 dark:text-blue-400" : ""}`}
-            >
-              {pos.label}
-            </span>
-          ))}
+        {/* Position markers & Ticks */}
+        <div className="relative mt-2 h-6 mx-[8px]"> {/* Add margin to account for thumb width approx */}
+          {positions.map((pos, idx) => {
+            const percent = (idx / (positions.length - 1)) * 100;
+
+            return (
+              <div key={pos.value}>
+                {/* Tick Mark */}
+                <div
+                  className="absolute top-1 w-0.5 h-1.5 bg-gray-400 dark:bg-gray-600 z-0 transform -translate-x-1/2 pointer-events-none"
+                  style={{ left: `${percent}%` }}
+                />
+
+                {/* Label */}
+                <span
+                  className={`absolute top-0 -translate-x-1/2 text-[10px] transition-colors ${positionStates[idx] === "unavailable"
+                    ? "text-gray-300 dark:text-gray-600"
+                    : positionStates[idx] === "warning"
+                      ? "text-amber-500"
+                      : "text-gray-500 dark:text-gray-400"
+                    } ${idx === localIndex ? "font-bold text-blue-600 dark:text-blue-400" : ""}`}
+                  style={{ left: `${percent}%` }}
+                >
+                  {pos.label}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         {/* Current value and KV cache */}
@@ -122,11 +158,10 @@ export function ContextSlider({
           <div>
             <span className="text-gray-600 dark:text-gray-400">KV Cache: </span>
             <span
-              className={`font-medium ${
-                warnings.length > 0
-                  ? "text-amber-600 dark:text-amber-400"
-                  : "text-gray-900 dark:text-gray-100"
-              }`}
+              className={`font-medium ${warnings.length > 0
+                ? "text-amber-600 dark:text-amber-400"
+                : "text-gray-900 dark:text-gray-100"
+                }`}
             >
               {kvCacheGb.toFixed(2)} GB
             </span>
@@ -164,10 +199,11 @@ export function ContextSlider({
 
 function formatContext(tokens: number): string {
   if (tokens >= 1_000_000) {
-    return `${tokens / 1_000_000}M`;
+    const val = tokens / 1_000_000;
+    return Number.isInteger(val) ? `${val}M` : `${val.toFixed(1)}M`;
   }
   if (tokens >= 1_000) {
-    return `${tokens / 1_000}K`;
+    return `${Math.floor(tokens / 1_000)}K`;
   }
   return String(tokens);
 }

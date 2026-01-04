@@ -140,6 +140,7 @@ export function createChartPoints(
         domains: combo.domains,
         max_context: combo.max_context,
         bits_per_weight: combo.bits_per_weight,
+        total_params_b: combo.total_params_b,
       };
     });
 }
