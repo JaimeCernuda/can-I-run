@@ -36,12 +36,7 @@ export function ContextSlider({
     setLocalIndex(selectedIndex);
   }
 
-  const handlePointerUp = () => {
-    setIsDragging(false);
-    if (localIndex !== selectedIndex) {
-      onIndexChange(localIndex);
-    }
-  };
+
 
   const selectedPosition = positions[localIndex];
   const selectedValue = selectedPosition?.value ?? 8192;
