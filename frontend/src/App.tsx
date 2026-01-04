@@ -4,7 +4,7 @@
  * Main application component that orchestrates the UI and state management.
  */
 
-import { useState, useMemo, useDeferredValue } from "react";
+import { useState, useMemo, useDeferredValue, useEffect } from "react";
 import { GPUSelector } from "./components/GPUSelector";
 import { ContextSlider } from "./components/ContextSlider";
 import { DualRangeSlider } from "./components/DualRangeSlider";
@@ -34,7 +34,24 @@ const data = computedData as {
 const MODEL_SIZE_POINTS = [0, 0.5, 1, 3, 7, 14, 30, 70, 150, 300, 405, 700];
 
 export default function App() {
-  const [view, setView] = useState<'home' | 'about'>('home');
+  // Simple URL routing
+  const [view, setView] = useState<'home' | 'about'>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('view') === 'about' ? 'about' : 'home';
+  });
+
+  // Update URL when view changes
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (view === 'about') {
+      params.set('view', 'about');
+    } else {
+      params.delete('view');
+    }
+    const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+    window.history.pushState({}, '', newUrl);
+  }, [view]);
+
   // GPU selection state
   const [selectedGpu, setSelectedGpu] = useState<GPU | null>(null);
   const [customVram, setCustomVram] = useState<number | null>(null);
@@ -168,14 +185,14 @@ export default function App() {
             onClick={() => setView('about')}
             className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors border border-blue-500/30 px-3 py-1.5 rounded-lg hover:bg-blue-500/10"
           >
-            How It Works / Data
+            How It Works
           </button>
         </div>
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-6 space-y-6">
         {/* Filters Section */}
-        <section className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 space-y-4">
+        <section className="bg-gray-900/50 backdrop-blur-sm dark:bg-gray-900/50 rounded-lg border border-gray-700 p-6 space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <GPUSelector
               gpus={data.gpus}
@@ -255,19 +272,19 @@ export default function App() {
               <LinkedCharts points={chartPoints} maxVram={totalVram} />
             </section>
           ) : (
-            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
-              <p className="text-gray-600 dark:text-gray-400">
+            <div className="bg-gray-800 rounded-lg border border-gray-700 p-8 text-center">
+              <p className="text-gray-400">
                 No models fit in {totalVram} GB VRAM with {contextLength / 1000}K
                 context.
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
+              <p className="text-sm text-gray-500 mt-2">
                 Try reducing context length or selecting a GPU with more VRAM.
               </p>
             </div>
           )
         ) : (
-          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 text-center">
-            <p className="text-gray-600 dark:text-gray-400">
+          <div className="bg-gray-800 rounded-lg border border-gray-700 p-8 text-center">
+            <p className="text-gray-400">
               Select a GPU or enter custom VRAM to see recommendations.
             </p>
           </div>
