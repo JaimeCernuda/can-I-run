@@ -1,1057 +1,1079 @@
 {
   "gpus": [
     {
-      "name": "GeForce RTX 3080 Mobile/ Laptop",
-      "vendor": "NVIDIA",
-      "vram_gb": 816.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": 3557.02
+      "name": "Radeon RX 7900 XTX (Navi 31)",
+      "vendor": "AMD",
+      "vram_gb": 24.0,
+      "memory_bandwidth_gbps": 960.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Radeon RX 7900 XT (Navi 31)",
+      "vendor": "AMD",
+      "vram_gb": 20.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Radeon RX 6950 XT (Navi 21)",
+      "vendor": "AMD",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 576.0,
+      "generation": "RDNA 2"
+    },
+    {
+      "name": "Radeon RX 7600 XT (Navi 33)",
+      "vendor": "AMD",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 288.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Radeon RX 7700 (Navi 32)",
+      "vendor": "AMD",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 624.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Radeon RX 7800 XT (Navi 32)",
+      "vendor": "AMD",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 624.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Radeon RX 7900 GRE (Navi 31)",
+      "vendor": "AMD",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 576.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Radeon RX 6700 XT (Navi 22)",
+      "vendor": "AMD",
+      "vram_gb": 12.0,
+      "memory_bandwidth_gbps": 384.0,
+      "generation": "RDNA 2"
+    },
+    {
+      "name": "Radeon RX 6750 GRE 12GB (Navi 22)",
+      "vendor": "AMD",
+      "vram_gb": 12.0,
+      "memory_bandwidth_gbps": 384.0,
+      "generation": "RDNA 2"
+    },
+    {
+      "name": "Radeon RX 6750 XT (Navi 22)",
+      "vendor": "AMD",
+      "vram_gb": 12.0,
+      "memory_bandwidth_gbps": 432.0,
+      "generation": "RDNA 2"
+    },
+    {
+      "name": "Radeon RX 7700 XT (Navi 32)",
+      "vendor": "AMD",
+      "vram_gb": 12.0,
+      "memory_bandwidth_gbps": 432.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Radeon RX 6700 (Navi 22)",
+      "vendor": "AMD",
+      "vram_gb": 10.0,
+      "memory_bandwidth_gbps": 320.0,
+      "generation": "RDNA 2"
+    },
+    {
+      "name": "Radeon RX 6750 GRE 10GB (Navi 22)",
+      "vendor": "AMD",
+      "vram_gb": 10.0,
+      "memory_bandwidth_gbps": 320.0,
+      "generation": "RDNA 2"
+    },
+    {
+      "name": "Radeon RX 6600 (Navi 23)",
+      "vendor": "AMD",
+      "vram_gb": 8.0,
+      "memory_bandwidth_gbps": 224.0,
+      "generation": "RDNA 2"
+    },
+    {
+      "name": "Radeon RX 6600 XT (Navi 23)",
+      "vendor": "AMD",
+      "vram_gb": 8.0,
+      "memory_bandwidth_gbps": 256.0,
+      "generation": "RDNA 2"
+    },
+    {
+      "name": "Radeon RX 6650 XT (Navi 23)",
+      "vendor": "AMD",
+      "vram_gb": 8.0,
+      "memory_bandwidth_gbps": 280.0,
+      "generation": "RDNA 2"
+    },
+    {
+      "name": "Radeon RX 7400 (Navi 33)",
+      "vendor": "AMD",
+      "vram_gb": 8.0,
+      "memory_bandwidth_gbps": 173.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Radeon RX 7600 (Navi 33)",
+      "vendor": "AMD",
+      "vram_gb": 8.0,
+      "memory_bandwidth_gbps": 288.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Radeon RX 7650 GRE (Navi 33)",
+      "vendor": "AMD",
+      "vram_gb": 8.0,
+      "memory_bandwidth_gbps": 288.0,
+      "generation": "RDNA 3"
+    },
+    {
+      "name": "Apple M2 Ultra (60-core)",
+      "vendor": "Apple",
+      "vram_gb": 192.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Ultra (76-core)",
+      "vendor": "Apple",
+      "vram_gb": 192.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M1 Ultra (48-core)",
+      "vendor": "Apple",
+      "vram_gb": 128.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M1 Ultra (64-core)",
+      "vendor": "Apple",
+      "vram_gb": 128.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M2 Ultra (60-core)",
+      "vendor": "Apple",
+      "vram_gb": 128.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Ultra (76-core)",
+      "vendor": "Apple",
+      "vram_gb": 128.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M3 Max (40-core)",
+      "vendor": "Apple",
+      "vram_gb": 128.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M4 Max (32-core)",
+      "vendor": "Apple",
+      "vram_gb": 128.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M4 Max (40-core)",
+      "vendor": "Apple",
+      "vram_gb": 128.0,
+      "memory_bandwidth_gbps": 546.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M2 Max (30-core)",
+      "vendor": "Apple",
+      "vram_gb": 96.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Max (38-core)",
+      "vendor": "Apple",
+      "vram_gb": 96.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M3 Max (30-core)",
+      "vendor": "Apple",
+      "vram_gb": 96.0,
+      "memory_bandwidth_gbps": 300.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M1 Max (24-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M1 Max (32-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M1 Ultra (48-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M1 Ultra (64-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M2 Max (30-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Max (38-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Ultra (60-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Ultra (76-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 800.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M3 Max (30-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 300.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M3 Max (40-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M4 Max (32-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M4 Max (40-core)",
+      "vendor": "Apple",
+      "vram_gb": 64.0,
+      "memory_bandwidth_gbps": 546.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M3 Max (40-core)",
+      "vendor": "Apple",
+      "vram_gb": 48.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M4 Pro (16-core)",
+      "vendor": "Apple",
+      "vram_gb": 48.0,
+      "memory_bandwidth_gbps": 273.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M4 Pro (20-core)",
+      "vendor": "Apple",
+      "vram_gb": 48.0,
+      "memory_bandwidth_gbps": 273.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M4 Max (40-core)",
+      "vendor": "Apple",
+      "vram_gb": 48.0,
+      "memory_bandwidth_gbps": 546.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M3 Pro (14-core)",
+      "vendor": "Apple",
+      "vram_gb": 36.0,
+      "memory_bandwidth_gbps": 150.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M3 Pro (18-core)",
+      "vendor": "Apple",
+      "vram_gb": 36.0,
+      "memory_bandwidth_gbps": 150.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M3 Max (30-core)",
+      "vendor": "Apple",
+      "vram_gb": 36.0,
+      "memory_bandwidth_gbps": 300.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M4 Max (32-core)",
+      "vendor": "Apple",
+      "vram_gb": 36.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M1 Pro (14-core)",
+      "vendor": "Apple",
+      "vram_gb": 32.0,
+      "memory_bandwidth_gbps": 200.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M1 Pro (16-core)",
+      "vendor": "Apple",
+      "vram_gb": 32.0,
+      "memory_bandwidth_gbps": 200.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M1 Max (24-core)",
+      "vendor": "Apple",
+      "vram_gb": 32.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M1 Max (32-core)",
+      "vendor": "Apple",
+      "vram_gb": 32.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M2 Pro (16-core)",
+      "vendor": "Apple",
+      "vram_gb": 32.0,
+      "memory_bandwidth_gbps": 200.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Pro (19-core)",
+      "vendor": "Apple",
+      "vram_gb": 32.0,
+      "memory_bandwidth_gbps": 200.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Max (30-core)",
+      "vendor": "Apple",
+      "vram_gb": 32.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Max (38-core)",
+      "vendor": "Apple",
+      "vram_gb": 32.0,
+      "memory_bandwidth_gbps": 400.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M4",
+      "vendor": "Apple",
+      "vram_gb": 32.0,
+      "memory_bandwidth_gbps": 120.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M2",
+      "vendor": "Apple",
+      "vram_gb": 24.0,
+      "memory_bandwidth_gbps": 100.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M3",
+      "vendor": "Apple",
+      "vram_gb": 24.0,
+      "memory_bandwidth_gbps": 100.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M4",
+      "vendor": "Apple",
+      "vram_gb": 24.0,
+      "memory_bandwidth_gbps": 120.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M4 Pro (16-core)",
+      "vendor": "Apple",
+      "vram_gb": 24.0,
+      "memory_bandwidth_gbps": 273.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M4 Pro (20-core)",
+      "vendor": "Apple",
+      "vram_gb": 24.0,
+      "memory_bandwidth_gbps": 273.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M3 Pro (14-core)",
+      "vendor": "Apple",
+      "vram_gb": 18.0,
+      "memory_bandwidth_gbps": 150.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M3 Pro (18-core)",
+      "vendor": "Apple",
+      "vram_gb": 18.0,
+      "memory_bandwidth_gbps": 150.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M1",
+      "vendor": "Apple",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 68.25,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M1 Pro (14-core)",
+      "vendor": "Apple",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 200.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M1 Pro (16-core)",
+      "vendor": "Apple",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 200.0,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M2",
+      "vendor": "Apple",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 100.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Pro (16-core)",
+      "vendor": "Apple",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 200.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M2 Pro (19-core)",
+      "vendor": "Apple",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 200.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M3",
+      "vendor": "Apple",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 100.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Apple M4",
+      "vendor": "Apple",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 120.0,
+      "generation": "Apple M4"
+    },
+    {
+      "name": "Apple M1",
+      "vendor": "Apple",
+      "vram_gb": 8.0,
+      "memory_bandwidth_gbps": 68.25,
+      "generation": "Apple M1"
+    },
+    {
+      "name": "Apple M2",
+      "vendor": "Apple",
+      "vram_gb": 8.0,
+      "memory_bandwidth_gbps": 100.0,
+      "generation": "Apple M2"
+    },
+    {
+      "name": "Apple M3",
+      "vendor": "Apple",
+      "vram_gb": 8.0,
+      "memory_bandwidth_gbps": 100.0,
+      "generation": "Apple M3"
+    },
+    {
+      "name": "Data Center GPU Max 1550",
+      "vendor": "Intel",
+      "vram_gb": 128.0,
+      "memory_bandwidth_gbps": 3276.8
+    },
+    {
+      "name": "Data Center GPU Max 1100",
+      "vendor": "Intel",
+      "vram_gb": 48.0,
+      "memory_bandwidth_gbps": 1228.8
+    },
+    {
+      "name": "Arc Pro B50",
+      "vendor": "Intel",
+      "vram_gb": 16.0,
+      "memory_bandwidth_gbps": 224.0
+    },
+    {
+      "name": "Arc 5 B580",
+      "vendor": "Intel",
+      "vram_gb": 12.0,
+      "memory_bandwidth_gbps": 456.0
+    },
+    {
+      "name": "Arc 5 B570",
+      "vendor": "Intel",
+      "vram_gb": 10.0,
+      "memory_bandwidth_gbps": 380.0
+    },
+    {
+      "name": "Arc Pro A40",
+      "vendor": "Intel",
+      "vram_gb": 6.0,
+      "memory_bandwidth_gbps": 192.0
+    },
+    {
+      "name": "Arc Pro A50",
+      "vendor": "Intel",
+      "vram_gb": 6.0,
+      "memory_bandwidth_gbps": 192.0
     },
     {
       "name": "RTX PRO 6000 Blackwell Max-Q Workstation Edition",
       "vendor": "NVIDIA",
       "vram_gb": 96.0,
-      "memory_bandwidth_gbps": 1792.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 1792.0
     },
     {
       "name": "RTX PRO 6000 Blackwell Workstation Edition",
       "vendor": "NVIDIA",
       "vram_gb": 96.0,
-      "memory_bandwidth_gbps": 1792.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "RTX A6000",
-      "vendor": "NVIDIA",
-      "vram_gb": 48.0,
-      "memory_bandwidth_gbps": 768.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": 3621.81
+      "memory_bandwidth_gbps": 1792.0
     },
     {
       "name": "RTX 5880 Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 48.0,
       "memory_bandwidth_gbps": 960.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX 6000 Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 48.0,
       "memory_bandwidth_gbps": 960.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX PRO 5000 Blackwell",
       "vendor": "NVIDIA",
       "vram_gb": 48.0,
-      "memory_bandwidth_gbps": 1344.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "Nvidia Titan V (CEO Edition)",
-      "vendor": "NVIDIA",
-      "vram_gb": 32.0,
-      "memory_bandwidth_gbps": 870.4,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 1344.0
     },
     {
       "name": "GeForce RTX 5090",
       "vendor": "NVIDIA",
       "vram_gb": 32.0,
       "memory_bandwidth_gbps": 1792.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "RTX 5000 Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 32.0,
       "memory_bandwidth_gbps": 576.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "RTX PRO 4500 Blackwell",
       "vendor": "NVIDIA",
       "vram_gb": 32.0,
-      "memory_bandwidth_gbps": 896.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "Nvidia Titan RTX",
-      "vendor": "NVIDIA",
-      "vram_gb": 24.0,
-      "memory_bandwidth_gbps": 672.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 3090",
-      "vendor": "NVIDIA",
-      "vram_gb": 24.0,
-      "memory_bandwidth_gbps": 935.8,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": 3865.39
+      "memory_bandwidth_gbps": 896.0
     },
     {
       "name": "GeForce RTX 3090 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 24.0,
       "memory_bandwidth_gbps": 1008.3,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 4090 D",
       "vendor": "NVIDIA",
       "vram_gb": 24.0,
       "memory_bandwidth_gbps": 1008.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": 6898.71
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4090",
       "vendor": "NVIDIA",
       "vram_gb": 24.0,
       "memory_bandwidth_gbps": 1008.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": 6898.71
-    },
-    {
-      "name": "Quadro RTX 6000 Mobile",
-      "vendor": "NVIDIA",
-      "vram_gb": 24.0,
-      "memory_bandwidth_gbps": 672.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX A5000",
       "vendor": "NVIDIA",
       "vram_gb": 24.0,
-      "memory_bandwidth_gbps": 768.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 768.0
     },
     {
       "name": "RTX A5500",
       "vendor": "NVIDIA",
       "vram_gb": 24.0,
-      "memory_bandwidth_gbps": 768.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 768.0
     },
     {
       "name": "RTX 4500 Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 24.0,
       "memory_bandwidth_gbps": 432.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX PRO 4000 Blackwell",
       "vendor": "NVIDIA",
       "vram_gb": 24.0,
-      "memory_bandwidth_gbps": 672.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "RTX PRO 5000 Blackwell Mobile",
-      "vendor": "NVIDIA",
-      "vram_gb": 24.0,
-      "memory_bandwidth_gbps": 896.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 672.0
     },
     {
       "name": "RTX A4500",
       "vendor": "NVIDIA",
       "vram_gb": 20.0,
-      "memory_bandwidth_gbps": 640.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 640.0
     },
     {
       "name": "RTX 4000 SFF Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 20.0,
       "memory_bandwidth_gbps": 280.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX 4000 Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 20.0,
       "memory_bandwidth_gbps": 360.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4060 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 288.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4070 Ti Super",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 672.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4080",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 717.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": 5064.99
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4080 Super",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 736.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 5060 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "GeForce RTX 5070 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 896.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "GeForce RTX 5080",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 960.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "GeForce RTX 3080 Ti Mobile/ Laptop",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 512.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": 3556.67
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 4090 Mobile/ Laptop",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 576.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": 6898.71
-    },
-    {
-      "name": "Quadro RTX 5000 Mobile",
-      "vendor": "NVIDIA",
-      "vram_gb": 16.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "Quadro RTX 5000 Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 16.0,
-      "memory_bandwidth_gbps": 384.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX A4000",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 448.0
     },
     {
       "name": "RTX A4500 Mobile",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
-      "memory_bandwidth_gbps": 512.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 512.0
     },
     {
       "name": "RTX A5000 Mobile",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 448.0
     },
     {
       "name": "RTX A5500 Mobile",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
-      "memory_bandwidth_gbps": 512.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 512.0
     },
     {
       "name": "RTX 2000 Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 224.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX 5000 Mobile Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 16.0,
       "memory_bandwidth_gbps": 576.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "RTX PRO 4000 Blackwell Mobile",
-      "vendor": "NVIDIA",
-      "vram_gb": 16.0,
-      "memory_bandwidth_gbps": 896.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "TITAN X Pascal",
-      "vendor": "NVIDIA",
-      "vram_gb": 12.0,
-      "memory_bandwidth_gbps": 480.0,
-      "fp16_tflops": 0,
-      "generation": "Pascal",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "TITAN Xp",
-      "vendor": "NVIDIA",
-      "vram_gb": 12.0,
-      "memory_bandwidth_gbps": 547.7,
-      "fp16_tflops": 0,
-      "generation": "Pascal",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "Nvidia Titan V",
-      "vendor": "NVIDIA",
-      "vram_gb": 12.0,
-      "memory_bandwidth_gbps": 652.8,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "GeForce RTX 2060",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 336.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Turing"
     },
     {
       "name": "GeForce RTX 3060",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 360.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 3080",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 912.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": 3557.02
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 3080 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 912.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": 3556.67
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 4070",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 504.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": 3653.07
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4070 Super",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 504.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4070 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 504.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": 3653.07
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4080",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 504.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": 5064.99
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 5070",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 672.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "GeForce RTX 4080 Mobile/ Laptop",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 432.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": 5064.99
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX A2000",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
-      "memory_bandwidth_gbps": 288.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 288.0
     },
     {
       "name": "RTX A3000 Mobile 12 GB",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
-      "memory_bandwidth_gbps": 336.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 336.0
     },
     {
       "name": "RTX 3500 Mobile Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 432.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX 4000 Mobile Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 12.0,
       "memory_bandwidth_gbps": 432.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "RTX PRO 3000 Blackwell Mobile",
-      "vendor": "NVIDIA",
-      "vram_gb": 12.0,
-      "memory_bandwidth_gbps": 672.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1080 Ti",
-      "vendor": "NVIDIA",
-      "vram_gb": 11.0,
-      "memory_bandwidth_gbps": 484.0,
-      "fp16_tflops": 0,
-      "generation": "Pascal",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2080 Ti",
-      "vendor": "NVIDIA",
-      "vram_gb": 11.0,
-      "memory_bandwidth_gbps": 616.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 3080",
-      "vendor": "NVIDIA",
-      "vram_gb": 10.0,
-      "memory_bandwidth_gbps": 760.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": 3557.02
-    },
-    {
-      "name": "GeForce GTX 1070",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 256.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1070 Ti",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 256.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1080",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 352.0,
-      "fp16_tflops": 0,
-      "generation": "Pascal",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2060 Super",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2070",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2070 Super",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2080",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 384.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2080 Super",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 3050",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 224.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 3060",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 240.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 3060 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 608.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 3070",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": 2283.62
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 3070 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 608.3,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 4060",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 272.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4060 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 288.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 5050",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 320.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "GeForce RTX 5060",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "GeForce RTX 5060 Ti",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1070 (Notebook)",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 256.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1070 Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 256.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1080 (Notebook)",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 320.0,
-      "fp16_tflops": 0,
-      "generation": "Pascal",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1080 Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 320.0,
-      "fp16_tflops": 0,
-      "generation": "Pascal",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2070 Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2070 Super Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2080 Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 384.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2080 Super Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 352.0,
-      "fp16_tflops": 0,
-      "generation": "Turing",
-      "baseline_tps_8b_q4": null
+      "generation": "Blackwell"
     },
     {
       "name": "GeForce RTX 3070 Mobile/ Laptop",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": 2283.62
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 3070 Ti Mobile/ Laptop",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 4060 Mobile/ Laptop",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 256.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 4070 Mobile/ Laptop",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 256.0,
-      "fp16_tflops": 0,
-      "generation": "Ada Lovelace",
-      "baseline_tps_8b_q4": 3653.07
-    },
-    {
-      "name": "Quadro RTX 4000 Mobile",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "Quadro RTX 4000 Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 416.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX A1000",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 192.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "RTX A4000 Mobile",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 384.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 384.0
     },
     {
       "name": "RTX 2000 Mobile Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 256.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX 3000 Mobile Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 8.0,
       "memory_bandwidth_gbps": 256.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "RTX PRO 1000 Blackwell Mobile",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "RTX PRO 2000 Blackwell Mobile",
-      "vendor": "NVIDIA",
-      "vram_gb": 8.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1660",
-      "vendor": "NVIDIA",
-      "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 192.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1660 Super",
-      "vendor": "NVIDIA",
-      "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 336.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce GTX 1660 Ti",
-      "vendor": "NVIDIA",
-      "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 288.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2060",
-      "vendor": "NVIDIA",
-      "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 336.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "GeForce RTX 3050",
       "vendor": "NVIDIA",
       "vram_gb": 6.0,
       "memory_bandwidth_gbps": 168.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "GeForce RTX 2060 Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 264.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 3060 Mobile/ Laptop",
       "vendor": "NVIDIA",
       "vram_gb": 6.0,
       "memory_bandwidth_gbps": 336.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "GeForce RTX 4050 Mobile/ Laptop",
       "vendor": "NVIDIA",
       "vram_gb": 6.0,
       "memory_bandwidth_gbps": 192.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "Quadro RTX 3000 Mobile",
-      "vendor": "NVIDIA",
-      "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 448.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
-    },
-    {
-      "name": "Quadro RTX 3000 Max-Q",
-      "vendor": "NVIDIA",
-      "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 416.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
       "name": "RTX A2000",
       "vendor": "NVIDIA",
       "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 288.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 288.0
     },
     {
       "name": "RTX A1000 Mobile 6 GB",
       "vendor": "NVIDIA",
       "vram_gb": 6.0,
       "memory_bandwidth_gbps": 168.0,
-      "fp16_tflops": 0,
-      "generation": "Ampere",
-      "baseline_tps_8b_q4": null
+      "generation": "Ampere"
     },
     {
       "name": "RTX A3000 Mobile",
       "vendor": "NVIDIA",
       "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 264.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "memory_bandwidth_gbps": 264.0
     },
     {
       "name": "RTX 1000 Mobile Ada Generation",
       "vendor": "NVIDIA",
       "vram_gb": 6.0,
       "memory_bandwidth_gbps": 192.0,
-      "fp16_tflops": 0,
-      "generation": "Unknown",
-      "baseline_tps_8b_q4": null
+      "generation": "Ada Lovelace"
     },
     {
-      "name": "RTX PRO 500 Blackwell Mobile",
+      "name": "GeForce RTX 3080 Mobile/ Laptop",
       "vendor": "NVIDIA",
-      "vram_gb": 6.0,
-      "memory_bandwidth_gbps": 336.0,
-      "fp16_tflops": 0,
-      "generation": "Blackwell",
-      "baseline_tps_8b_q4": null
+      "vram_gb": 0.796875,
+      "memory_bandwidth_gbps": 448.0,
+      "generation": "Ampere"
     }
   ]
 }

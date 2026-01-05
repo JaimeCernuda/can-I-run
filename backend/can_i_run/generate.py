@@ -17,20 +17,21 @@ Usage:
 """
 
 import json
-import os
 from pathlib import Path
-from typing import Any
 
 from .models import (
-    GPU, Model, Quantization, Benchmarks, Candidate,
-    ModelDomain, ModelCapability, QualityTier
+    GPU,
+    Model,
+    Quantization,
+    Benchmarks,
+    ModelDomain,
+    ModelCapability,
+    QualityTier,
 )
-from .vram import calculate_model_vram, calculate_total_vram, CUDA_OVERHEAD_GB
+from .vram import calculate_model_vram, CUDA_OVERHEAD_GB
 from .kv_cache import calculate_kv_cache, CONTEXT_POSITIONS
 from .quality import calculate_quality_score
 from .performance import estimate_tokens_per_second
-from .efficiency import calculate_efficiency
-from .pareto import compute_pareto_frontier, get_pareto_summary
 
 
 def load_json_data(data_dir: Path) -> tuple[list[dict], list[dict], list[dict]]:
@@ -57,18 +58,20 @@ def parse_gpu(data: dict) -> GPU:
         fp16_tflops=data.get("fp16_tflops"),
         int8_tops=data.get("int8_tops"),
         generation=data.get("generation"),
-        baseline_tps_8b_q4=data.get("baseline_tps_8b_q4"),
     )
 
 
 def parse_model(data: dict) -> Model:
     """Parse Model from JSON data."""
+    benchmarks_data = data.get("benchmarks", {})
     benchmarks = Benchmarks(
-        mmlu=data.get("benchmarks", {}).get("mmlu"),
-        humaneval=data.get("benchmarks", {}).get("humaneval"),
-        gsm8k=data.get("benchmarks", {}).get("gsm8k"),
-        bfcl=data.get("benchmarks", {}).get("bfcl"),
-        tool_accuracy=data.get("benchmarks", {}).get("tool_accuracy"),
+        mmlu=benchmarks_data.get("mmlu"),
+        mmlu_pro=benchmarks_data.get("mmlu_pro"),
+        humaneval=benchmarks_data.get("humaneval"),
+        gsm8k=benchmarks_data.get("gsm8k"),
+        math=benchmarks_data.get("math"),
+        bfcl=benchmarks_data.get("bfcl"),
+        tool_accuracy=benchmarks_data.get("tool_accuracy"),
     )
 
     domains = [ModelDomain(d) for d in data.get("domains", [])]
@@ -108,9 +111,7 @@ def parse_quantization(data: dict) -> Quantization:
 
 
 def generate_model_quant_data(
-    model: Model,
-    quant: Quantization,
-    domain: ModelDomain = ModelDomain.GENERAL
+    model: Model, quant: Quantization, domain: ModelDomain = ModelDomain.GENERAL
 ) -> dict:
     """Generate computed data for a model+quantization combination."""
     model_vram = calculate_model_vram(model, quant)
@@ -144,9 +145,7 @@ def generate_kv_cache_data(model: Model) -> dict:
 
 
 def generate_performance_data(
-    model: Model,
-    quant: Quantization,
-    gpus: list[GPU]
+    model: Model, quant: Quantization, gpus: list[GPU]
 ) -> dict:
     """Generate performance estimates for all GPUs."""
     perf_data = {}
@@ -157,9 +156,7 @@ def generate_performance_data(
 
 
 def generate_full_dataset(
-    gpus: list[GPU],
-    models: list[Model],
-    quants: list[Quantization]
+    gpus: list[GPU], models: list[Model], quants: list[Quantization]
 ) -> dict:
     """Generate the full dataset for the frontend."""
     # GPU data (simple, just serialize)
@@ -200,9 +197,9 @@ def generate_full_dataset(
 
     # Context positions for slider
     from .kv_cache import format_context_length
+
     context_positions = [
-        {"value": pos, "label": format_context_length(pos)}
-        for pos in CONTEXT_POSITIONS
+        {"value": pos, "label": format_context_length(pos)} for pos in CONTEXT_POSITIONS
     ]
 
     return {
@@ -216,7 +213,7 @@ def generate_full_dataset(
             "total_quants": len(quants),
             "total_combos": len(model_quant_combos),
             "overhead_gb": CUDA_OVERHEAD_GB,
-        }
+        },
     }
 
 

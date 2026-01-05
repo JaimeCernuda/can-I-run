@@ -41,7 +41,7 @@ def calculate_model_vram(model: Model, quant: Quantization) -> float:
     # Use total params for VRAM calculation (all experts for MoE)
     params = model.total_params_b * 1e9
     bytes_required = params * (quant.bits_per_weight / 8)
-    gb_required = bytes_required / (1024 ** 3)
+    gb_required = bytes_required / (1024**3)
     return gb_required
 
 
@@ -49,7 +49,7 @@ def calculate_total_vram(
     model: Model,
     quant: Quantization,
     kv_cache_gb: float,
-    overhead_gb: float = CUDA_OVERHEAD_GB
+    overhead_gb: float = CUDA_OVERHEAD_GB,
 ) -> float:
     """
     Calculate total VRAM required for inference.
@@ -69,10 +69,7 @@ def calculate_total_vram(
     return model_vram + kv_cache_gb + overhead_gb
 
 
-def calculate_vram_headroom(
-    total_vram_available: float,
-    vram_required: float
-) -> float:
+def calculate_vram_headroom(total_vram_available: float, vram_required: float) -> float:
     """
     Calculate remaining VRAM headroom after loading model.
 
@@ -98,7 +95,7 @@ def get_vram_breakdown(
     quant: Quantization,
     kv_cache_gb: float,
     total_vram_available: float,
-    overhead_gb: float = CUDA_OVERHEAD_GB
+    overhead_gb: float = CUDA_OVERHEAD_GB,
 ) -> dict:
     """
     Get a detailed breakdown of VRAM usage for display.
@@ -126,7 +123,9 @@ def get_vram_breakdown(
         "overhead_gb": overhead_gb,
         "total_required_gb": round(total_required, 2),
         "headroom_gb": round(headroom, 2),
-        "headroom_percent": round((headroom / total_vram_available) * 100, 1) if total_vram_available > 0 else 0,
+        "headroom_percent": round((headroom / total_vram_available) * 100, 1)
+        if total_vram_available > 0
+        else 0,
         "fits": headroom >= 0,
         "safe": headroom >= 1.0,  # 1 GB minimum recommended headroom
     }

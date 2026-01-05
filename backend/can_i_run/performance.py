@@ -34,7 +34,6 @@ Data Sources:
     - llama.cpp official benchmarks
 """
 
-from typing import Optional
 from .models import Model, Quantization, GPU
 from .vram import calculate_model_vram
 
@@ -42,15 +41,10 @@ from .vram import calculate_model_vram
 # Efficiency factors by quantization level
 # Lower bit quantization has more dequantization overhead
 QUANT_EFFICIENCY = {
-    "high": 0.75,    # FP16, Q8
+    "high": 0.75,  # FP16, Q8
     "medium": 0.70,  # Q4-Q6
-    "low": 0.60,     # Q2-Q3
+    "low": 0.60,  # Q2-Q3
 }
-
-
-# Baseline tokens/sec for LLaMA-3-8B Q4_K_M at 1024 context
-# Used to scale estimates for GPUs with measured data
-BASELINE_MODEL_SIZE_GB = 4.58  # 8B at Q4_K_M
 
 
 def get_efficiency_factor(bits_per_weight: float) -> float:
@@ -73,20 +67,18 @@ def get_efficiency_factor(bits_per_weight: float) -> float:
         return QUANT_EFFICIENCY["low"]
 
 
-def estimate_tokens_per_second_theoretical(
-    model: Model,
-    quant: Quantization,
-    gpu: GPU
-) -> float:
+def estimate_tokens_per_second(model: Model, quant: Quantization, gpu: GPU) -> float:
     """
-    Estimate tokens/sec using theoretical bandwidth calculation.
+    Estimate tokens per second for a model+quantization+GPU combination.
 
-    This is a fallback when no measured performance data is available.
+    Uses memory bandwidth-based calculation since LLM inference is memory-bound.
+    Each generated token requires reading ALL model weights from VRAM once,
+    making memory bandwidth the primary performance constraint.
 
     Args:
         model: Model specification
         quant: Quantization specification
-        gpu: GPU specification with bandwidth
+        gpu: GPU specification
 
     Returns:
         Estimated tokens per second
@@ -99,75 +91,11 @@ def estimate_tokens_per_second_theoretical(
     # Apply efficiency factor
     efficiency = get_efficiency_factor(quant.bits_per_weight)
 
-    return theoretical_max * efficiency
-
-
-def estimate_tokens_per_second_scaled(
-    model: Model,
-    quant: Quantization,
-    gpu: GPU
-) -> Optional[float]:
-    """
-    Estimate tokens/sec by scaling from measured baseline performance.
-
-    If the GPU has measured baseline performance (baseline_tps_8b_q4),
-    we scale that measurement based on model size. This is more accurate
-    than pure theoretical calculation.
-
-    Memory-bound scaling: tok/s scales inversely with model size.
-
-    Args:
-        model: Model specification
-        quant: Quantization specification
-        gpu: GPU specification with baseline performance
-
-    Returns:
-        Estimated tokens per second, or None if no baseline available
-    """
-    if gpu.baseline_tps_8b_q4 is None:
-        return None
-
-    model_size_gb = calculate_model_vram(model, quant)
-
-    # Scale inversely with model size
-    scale_factor = BASELINE_MODEL_SIZE_GB / model_size_gb
-
-    return gpu.baseline_tps_8b_q4 * scale_factor
-
-
-def estimate_tokens_per_second(
-    model: Model,
-    quant: Quantization,
-    gpu: GPU
-) -> float:
-    """
-    Estimate tokens per second for a model+quantization+GPU combination.
-
-    Uses measured baseline data when available, falls back to theoretical
-    bandwidth calculation otherwise.
-
-    Args:
-        model: Model specification
-        quant: Quantization specification
-        gpu: GPU specification
-
-    Returns:
-        Estimated tokens per second
-    """
-    # Try scaled estimate first (more accurate if baseline data available)
-    scaled = estimate_tokens_per_second_scaled(model, quant, gpu)
-    if scaled is not None:
-        return round(scaled, 1)
-
-    # Fall back to theoretical calculation
-    theoretical = estimate_tokens_per_second_theoretical(model, quant, gpu)
-    return round(theoretical, 1)
+    return round(theoretical_max * efficiency, 1)
 
 
 def estimate_moe_tokens_per_second(
-    model: Model,
-    quant: Quantization,
-    gpu: GPU
+    model: Model, quant: Quantization, gpu: GPU
 ) -> float:
     """
     Estimate tokens/sec specifically for MoE models.
@@ -178,6 +106,7 @@ def estimate_moe_tokens_per_second(
 
     In practice, MoE models are memory-bound like dense models,
     so performance is similar to a dense model of the same total size.
+    A 10% penalty is applied for expert routing overhead.
 
     Args:
         model: MoE model specification
@@ -189,21 +118,11 @@ def estimate_moe_tokens_per_second(
     """
     # For memory-bound inference, use total params (all experts read)
     # Apply slightly lower efficiency due to expert routing overhead
-    model_size_gb = calculate_model_vram(model, quant)
-
-    if gpu.baseline_tps_8b_q4 is not None:
-        scale_factor = BASELINE_MODEL_SIZE_GB / model_size_gb
-        return round(gpu.baseline_tps_8b_q4 * scale_factor * 0.9, 1)  # 90% MoE efficiency
-
-    theoretical = estimate_tokens_per_second_theoretical(model, quant, gpu)
-    return round(theoretical * 0.9, 1)
+    base_estimate = estimate_tokens_per_second(model, quant, gpu)
+    return round(base_estimate * 0.9, 1)  # 90% MoE efficiency
 
 
-def get_performance_breakdown(
-    model: Model,
-    quant: Quantization,
-    gpu: GPU
-) -> dict:
+def get_performance_breakdown(model: Model, quant: Quantization, gpu: GPU) -> dict:
     """
     Get detailed performance estimation breakdown for "How It Works" panel.
 
@@ -235,12 +154,8 @@ def get_performance_breakdown(
         "efficiency_factor": efficiency,
         "is_moe": model.is_moe,
         "estimated_tps": estimated,
-        "estimation_method": "scaled" if gpu.baseline_tps_8b_q4 else "theoretical",
+        "estimation_method": "bandwidth",
     }
-
-    if gpu.baseline_tps_8b_q4:
-        breakdown["baseline_tps"] = gpu.baseline_tps_8b_q4
-        breakdown["scale_factor"] = round(BASELINE_MODEL_SIZE_GB / model_size_gb, 3)
 
     if model.is_moe:
         breakdown["total_params_b"] = model.total_params_b

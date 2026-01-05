@@ -201,22 +201,41 @@ Token generation speed is estimated from GPU memory bandwidth and model size.
 
 ### 5.1 Why Memory-Bandwidth Bound?
 
-LLM inference has two phases:
+LLM inference has two distinct phases:
+
 1. **Prefill** (processing prompt): Compute-bound, benefits from TFLOPS
 2. **Decode** (generating tokens): Memory-bound, limited by bandwidth
 
-Since most time is spent in decode, **memory bandwidth is the primary constraint**. Each generated token requires reading ALL model weights from VRAM once.
+**The decode phase dominates user experience.** While prefill can process the entire prompt quickly using parallel matrix operations, the actual token generation happens one token at a time. Each generated token requires:
 
-### 5.2 Theoretical Estimation
+1. Reading ALL model weights from VRAM (there's no "caching" of weights between tokens)
+2. Performing a relatively small amount of computation
+3. Writing output back to memory
 
-When no measured benchmarks are available:
+This creates an extreme **memory-bound bottleneck**. The GPU's tensor cores are often idle, waiting for data to arrive from memory.
+
+### 5.2 Why Tensor Cores Don't Matter (For Inference)
+
+A common misconception is that more TFLOPS = faster inference. In reality:
+
+| GPU | Memory BW | FP16 TFLOPS | 70B Q4 Speed |
+|-----|-----------|-------------|--------------|
+| RTX 4090 | 1,008 GB/s | 82.6 | ~25 tok/s |
+| RTX 3090 | 936 GB/s | 35.6 | ~23 tok/s |
+| A100 (40GB) | 1,555 GB/s | 77.9 | ~39 tok/s |
+
+The RTX 4090 has 2.3× the TFLOPS of the RTX 3090, but only ~1.08× the memory bandwidth—and inference speed scales with bandwidth, not TFLOPS.
+
+**Why?** The arithmetic intensity (FLOPs per byte read) of token generation is extremely low. For each weight read from memory, only a few multiply-accumulate operations occur. The GPU finishes computing before the next weights arrive.
+
+### 5.3 The Formula
 
 $$T/s = \frac{BW}{V_{weights}} \times \eta$$
 
 Where:
 - $BW$ = GPU memory bandwidth (GB/s)
 - $V_{weights}$ = Model size in GB
-- $\eta$ = Efficiency factor
+- $\eta$ = Efficiency factor (accounts for software overhead)
 
 **Efficiency factors by quantization**:
 
@@ -226,15 +245,15 @@ Where:
 | Medium (Q4-Q6) | 4-6 | 0.70 |
 | Low (Q2-Q3) | < 4 | 0.60 |
 
-Lower bit quantization has more dequantization overhead, reducing efficiency.
+Lower bit quantization has more dequantization overhead (converting 4-bit to FP16 for computation), reducing efficiency.
 
-### 5.3 Scaled Estimation
-
-When the GPU has measured baseline performance (LLaMA-3-8B at Q4_K_M), we scale from that measurement:
-
-$$T/s = T_{baseline} \times \frac{V_{baseline}}{V_{model}}$$
-
-This is more accurate than pure theoretical calculation because it incorporates real-world software stack efficiency.
+**Example: RTX 4090 + Llama-70B Q4_K_M**
+```
+Bandwidth = 1,008 GB/s
+Model = 31.6 GB
+Theoretical = 1,008 ÷ 31.6 = 31.9 tok/s
+With 70% efficiency = 22.3 tok/s
+```
 
 ### 5.4 MoE Model Performance
 
@@ -313,31 +332,23 @@ def compute_pareto_frontier(candidates):
 
 | Source | Data | How We Use It |
 |--------|------|---------------|
-| dbgpu (Python library) | VRAM, bandwidth, TFLOPS, architecture | Aggregates data from TechPowerUp's GPU database. We use this library to extract specs for 50+ GPUs. |
-| XiongjieDai/GPU-Benchmarks-on-LLM-Inference | Measured tok/s for 30+ GPUs | Real-world LLaMA-3-8B Q4_K_M benchmarks. We use baseline_tps_8b_q4 to scale performance estimates. |
+| [voidful/gpu-info-api](https://github.com/voidful/gpu-info-api) | VRAM, bandwidth, release dates, architecture | Comprehensive GPU database aggregated from multiple sources |
 
-**GPU Benchmarks Repository**: [github.com/XiongjieDai/GPU-Benchmarks-on-LLM-Inference](https://github.com/XiongjieDai/GPU-Benchmarks-on-LLM-Inference)
+Performance estimation uses memory bandwidth directly (see Section 5) rather than measured benchmarks, since LLM inference is memory-bound and bandwidth provides accurate predictions across all GPU generations.
 
 ### Quantization Quality
 
 | Source | Data | How We Use It |
 |--------|------|---------------|
-| llama.cpp quantize README | Perplexity benchmarks on LLaMA-3-8B | Primary source for PPL increase values. Located in the llama.cpp repository's examples/quantize/README.md |
-| Intel Low-bit Leaderboard | Model size vs quantization tolerance | Source for size penalty factors (small models degrade more than large models at same quant level) |
+| [llama.cpp quantize tool](https://github.com/ggml-org/llama.cpp/blob/master/tools/quantize/README.md) | PPL increase values | Primary source for quantization quality metrics |
+| [Intel Low-bit Quantized Open LLM Leaderboard](https://huggingface.co/spaces/Intel/low_bit_open_llm_leaderboard) | Quantization comparison across models | Informs size-based degradation patterns |
+| [Red Hat quantization study](https://developers.redhat.com/articles/2024/10/17/we-ran-over-half-million-evaluations-quantized-llms) | 500K+ evaluations | Validates that larger models tolerate quantization better |
 
-**llama.cpp Quantization Docs**: [github.com/ggerganov/llama.cpp/blob/master/examples/quantize/README.md](https://github.com/ggerganov/llama.cpp/blob/master/examples/quantize/README.md)
-
-**Intel Low-bit Leaderboard**: [huggingface.co/spaces/Intel/low_bit_open_llm_leaderboard](https://huggingface.co/spaces/Intel/low_bit_open_llm_leaderboard)
-
-### Model Benchmarks
+### Model Architectures & Benchmarks
 
 | Source | Data | How We Use It |
 |--------|------|---------------|
-| HuggingFace Model Cards | Architecture (layers, heads, hidden_dim) | Extracted from individual model repositories for KV cache calculation |
-| Unsloth | Curated model catalog | Primary list of inference-optimized models we support |
-| Open LLM Leaderboard | MMLU, HumanEval, GSM8K scores | Benchmark scores for quality calculation |
-| Berkeley Function Calling Leaderboard | BFCL scores | Tool-calling benchmark scores for the tool-calling domain filter |
-
-**Open LLM Leaderboard**: [huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard)
-
-**BFCL Leaderboard**: [gorilla.cs.berkeley.edu/leaderboard.html](https://gorilla.cs.berkeley.edu/leaderboard.html)
+| HuggingFace Model Cards (e.g., [unsloth/Llama-3.3-70B-Instruct](https://huggingface.co/unsloth/Llama-3.3-70B-Instruct)) | num_layers, num_kv_heads, hidden_dim | KV cache calculation |
+| [Open LLM Leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard) | MMLU, GSM8K scores | General knowledge and math benchmarks |
+| [EvalPlus Leaderboard](https://evalplus.github.io/leaderboard.html) | HumanEval+ scores | Code generation benchmark |
+| [Berkeley Function Calling Leaderboard](https://gorilla.cs.berkeley.edu/leaderboard.html) | BFCL scores | Tool-calling accuracy for function calling domain |

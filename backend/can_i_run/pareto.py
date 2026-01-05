@@ -27,19 +27,18 @@ Visual representation:
     └─────────────────────────────────────────┘
 """
 
-from dataclasses import dataclass
 from typing import TypeVar, Callable
 from .models import Candidate
 
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def compute_pareto_frontier_generic(
     candidates: list[T],
     get_metric: Callable[[T], float],
     get_vram: Callable[[T], float],
-    higher_is_better: bool = True
+    higher_is_better: bool = True,
 ) -> list[T]:
     """
     Generic Pareto frontier computation.
@@ -62,13 +61,11 @@ def compute_pareto_frontier_generic(
 
     # Sort by metric (best first) for efficiency
     sorted_candidates = sorted(
-        candidates,
-        key=lambda c: get_metric(c),
-        reverse=higher_is_better
+        candidates, key=lambda c: get_metric(c), reverse=higher_is_better
     )
 
     frontier = []
-    min_vram_so_far = float('inf')
+    min_vram_so_far = float("inf")
 
     for candidate in sorted_candidates:
         vram = get_vram(candidate)
@@ -96,7 +93,7 @@ def compute_quality_frontier(candidates: list[Candidate]) -> list[Candidate]:
         candidates,
         get_metric=lambda c: c.quality_score,
         get_vram=lambda c: c.vram_required,
-        higher_is_better=True
+        higher_is_better=True,
     )
 
 
@@ -114,7 +111,7 @@ def compute_performance_frontier(candidates: list[Candidate]) -> list[Candidate]
         candidates,
         get_metric=lambda c: c.tokens_per_second,
         get_vram=lambda c: c.vram_required,
-        higher_is_better=True
+        higher_is_better=True,
     )
 
 
@@ -132,13 +129,11 @@ def compute_efficiency_frontier(candidates: list[Candidate]) -> list[Candidate]:
         candidates,
         get_metric=lambda c: c.efficiency_score,
         get_vram=lambda c: c.vram_required,
-        higher_is_better=True
+        higher_is_better=True,
     )
 
 
-def compute_pareto_frontier(
-    candidates: list[Candidate]
-) -> list[Candidate]:
+def compute_pareto_frontier(candidates: list[Candidate]) -> list[Candidate]:
     """
     Compute all three Pareto frontiers and mark candidates.
 
@@ -164,14 +159,14 @@ def compute_pareto_frontier(
 
     # Return candidates on any frontier
     return [
-        c for c in candidates
+        c
+        for c in candidates
         if c.is_pareto_quality or c.is_pareto_performance or c.is_pareto_efficiency
     ]
 
 
 def filter_dominated_candidates(
-    candidates: list[Candidate],
-    vram_available: float
+    candidates: list[Candidate], vram_available: float
 ) -> list[Candidate]:
     """
     Filter out candidates that don't fit in available VRAM.
@@ -186,9 +181,7 @@ def filter_dominated_candidates(
     return [c for c in candidates if c.vram_required <= vram_available]
 
 
-def get_pareto_summary(
-    candidates: list[Candidate]
-) -> dict:
+def get_pareto_summary(candidates: list[Candidate]) -> dict:
     """
     Get summary statistics about the Pareto frontiers.
 
@@ -203,14 +196,17 @@ def get_pareto_summary(
     efficiency_frontier = [c for c in candidates if c.is_pareto_efficiency]
 
     all_pareto = [
-        c for c in candidates
+        c
+        for c in candidates
         if c.is_pareto_quality or c.is_pareto_performance or c.is_pareto_efficiency
     ]
 
     # Find candidates on multiple frontiers (balanced choices)
     multi_frontier = [
-        c for c in candidates
-        if sum([c.is_pareto_quality, c.is_pareto_performance, c.is_pareto_efficiency]) >= 2
+        c
+        for c in candidates
+        if sum([c.is_pareto_quality, c.is_pareto_performance, c.is_pareto_efficiency])
+        >= 2
     ]
 
     return {
@@ -224,18 +220,18 @@ def get_pareto_summary(
             {
                 "name": f"{c.model.name} {c.quant.name}",
                 "frontiers": [
-                    f for f in ["quality", "performance", "efficiency"]
+                    f
+                    for f in ["quality", "performance", "efficiency"]
                     if getattr(c, f"is_pareto_{f}")
-                ]
+                ],
             }
             for c in multi_frontier
-        ]
+        ],
     }
 
 
 def rank_candidates(
-    candidates: list[Candidate],
-    weights: dict = None
+    candidates: list[Candidate], weights: dict = None
 ) -> list[Candidate]:
     """
     Rank all candidates by a weighted combination of metrics.
@@ -263,9 +259,9 @@ def rank_candidates(
 
     def weighted_score(c: Candidate) -> float:
         return (
-            norm_weights.get("quality", 0) * (c.quality_score / max_quality) +
-            norm_weights.get("performance", 0) * (c.tokens_per_second / max_perf) +
-            norm_weights.get("efficiency", 0) * (c.efficiency_score / max_eff)
+            norm_weights.get("quality", 0) * (c.quality_score / max_quality)
+            + norm_weights.get("performance", 0) * (c.tokens_per_second / max_perf)
+            + norm_weights.get("efficiency", 0) * (c.efficiency_score / max_eff)
         )
 
     return sorted(candidates, key=weighted_score, reverse=True)

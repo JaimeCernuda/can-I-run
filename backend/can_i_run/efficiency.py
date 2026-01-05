@@ -25,11 +25,10 @@ Use Cases:
 """
 
 import math
-from typing import Optional
 
 
 # Normalization constants
-MAX_QUALITY_SCORE = 90.0    # Approximate max for best models
+MAX_QUALITY_SCORE = 90.0  # Approximate max for best models
 MAX_TOKENS_PER_SEC = 150.0  # Approximate max for small models on fast GPUs
 
 
@@ -60,9 +59,7 @@ def normalize_performance(tokens_per_second: float) -> float:
 
 
 def calculate_efficiency(
-    quality_score: float,
-    tokens_per_second: float,
-    vram_required: float
+    quality_score: float, tokens_per_second: float, vram_required: float
 ) -> float:
     """
     Calculate the efficiency score for a model configuration.
@@ -98,8 +95,7 @@ def calculate_efficiency(
 
 
 def calculate_efficiency_percentile(
-    efficiency: float,
-    all_efficiencies: list[float]
+    efficiency: float, all_efficiencies: list[float]
 ) -> float:
     """
     Calculate the percentile rank of an efficiency score.
@@ -125,7 +121,7 @@ def get_efficiency_breakdown(
     tokens_per_second: float,
     vram_required: float,
     model_name: str,
-    quant_name: str
+    quant_name: str,
 ) -> dict:
     """
     Get detailed efficiency calculation breakdown for "How It Works" panel.
@@ -158,7 +154,7 @@ def get_efficiency_breakdown(
         "formula": (
             f"sqrt({norm_quality:.3f} × {norm_perf:.3f}) ÷ {vram_required:.1f} × 100 = {efficiency:.2f}"
         ),
-        "interpretation": get_efficiency_interpretation(efficiency)
+        "interpretation": get_efficiency_interpretation(efficiency),
     }
 
 
@@ -184,9 +180,7 @@ def get_efficiency_interpretation(efficiency: float) -> str:
         return "Poor efficiency - not recommended"
 
 
-def compare_efficiency(
-    candidates: list[dict]
-) -> list[dict]:
+def compare_efficiency(candidates: list[dict]) -> list[dict]:
     """
     Compare efficiency across multiple candidates and add rankings.
 
@@ -198,9 +192,7 @@ def compare_efficiency(
     """
     # Sort by efficiency descending
     sorted_candidates = sorted(
-        candidates,
-        key=lambda x: x.get("efficiency_score", 0),
-        reverse=True
+        candidates, key=lambda x: x.get("efficiency_score", 0), reverse=True
     )
 
     all_efficiencies = [c.get("efficiency_score", 0) for c in candidates]
@@ -208,8 +200,7 @@ def compare_efficiency(
     for i, candidate in enumerate(sorted_candidates):
         candidate["efficiency_rank"] = i + 1
         candidate["efficiency_percentile"] = calculate_efficiency_percentile(
-            candidate.get("efficiency_score", 0),
-            all_efficiencies
+            candidate.get("efficiency_score", 0), all_efficiencies
         )
 
     return sorted_candidates

@@ -33,15 +33,15 @@ from .models import Model
 
 # Common context length positions for the slider
 CONTEXT_POSITIONS = [
-    2048,     # 2K
-    4096,     # 4K
-    8192,     # 8K
-    16384,    # 16K
-    32768,    # 32K
-    65536,    # 64K
-    131072,   # 128K
-    262144,   # 256K
-    524288,   # 512K
+    2048,  # 2K
+    4096,  # 4K
+    8192,  # 8K
+    16384,  # 16K
+    32768,  # 32K
+    65536,  # 64K
+    131072,  # 128K
+    262144,  # 256K
+    524288,  # 512K
     1048576,  # 1M
     2097152,  # 2M
 ]
@@ -66,7 +66,7 @@ def calculate_kv_cache(
     model: Model,
     context_length: int,
     batch_size: int = 1,
-    bytes_per_value: int = 2  # FP16
+    bytes_per_value: int = 2,  # FP16
 ) -> float:
     """
     Calculate the KV cache size for a given context length.
@@ -87,21 +87,20 @@ def calculate_kv_cache(
 
     # Calculate bytes needed for KV cache
     bytes_required = (
-        2 *                      # K and V
-        model.num_layers *
-        model.num_kv_heads *
-        head_dim *
-        context_length *
-        batch_size *
-        bytes_per_value
+        2  # K and V
+        * model.num_layers
+        * model.num_kv_heads
+        * head_dim
+        * context_length
+        * batch_size
+        * bytes_per_value
     )
 
-    return bytes_required / (1024 ** 3)
+    return bytes_required / (1024**3)
 
 
 def get_available_context_positions(
-    model: Model,
-    all_positions: list[int] = None
+    model: Model, all_positions: list[int] = None
 ) -> list[dict]:
     """
     Get available context positions for the slider, considering model limits.
@@ -124,21 +123,25 @@ def get_available_context_positions(
     results = []
     for pos in all_positions:
         if model is None:
-            results.append({
-                "position": pos,
-                "available": True,
-                "warning": False,
-                "label": format_context_length(pos)
-            })
+            results.append(
+                {
+                    "position": pos,
+                    "available": True,
+                    "warning": False,
+                    "label": format_context_length(pos),
+                }
+            )
         else:
             available = pos <= model.max_context_length
             warning = available and pos > model.effective_context_length
-            results.append({
-                "position": pos,
-                "available": available,
-                "warning": warning,
-                "label": format_context_length(pos)
-            })
+            results.append(
+                {
+                    "position": pos,
+                    "available": available,
+                    "warning": warning,
+                    "label": format_context_length(pos),
+                }
+            )
 
     return results
 
@@ -160,7 +163,7 @@ def format_context_length(tokens: int) -> str:
     elif tokens >= 1_000:
         val = tokens / 1_000
         # Check if it should be displayed as M (e.g. 1000K -> 1M, 2048K -> 2M is wrong logic, wait. 1024K should be 1M approx? No, 1M tokens is 1M. 1048576 is 1M power of 2)
-        # The user complained about "1024K". 
+        # The user complained about "1024K".
         # 1048576 / 1000 = 1048.576 K -> "1048K" or "1M"?
         # Let's handle power of 2 "M" specifically if needed, but the current logic divides by 1,000,000.
         # 1048576 / 1,000,000 = 1.04... -> 1.0M.
@@ -170,9 +173,7 @@ def format_context_length(tokens: int) -> str:
 
 
 def estimate_kv_cache_warning(
-    kv_cache_gb: float,
-    total_vram_gb: float,
-    threshold_percent: float = 50.0
+    kv_cache_gb: float, total_vram_gb: float, threshold_percent: float = 50.0
 ) -> dict:
     """
     Check if KV cache is taking up too much VRAM.
@@ -197,6 +198,7 @@ def estimate_kv_cache_warning(
         "threshold_percent": threshold_percent,
         "message": (
             f"KV cache uses {percent:.1f}% of VRAM (>{threshold_percent}%)"
-            if percent > threshold_percent else None
-        )
+            if percent > threshold_percent
+            else None
+        ),
     }
