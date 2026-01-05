@@ -42,21 +42,21 @@ export function VRAMBreakdown({ breakdown, gpuName }: VRAMBreakdownProps) {
   const headroomBarPercent = Math.max(0, headroom_percent);
 
   return (
-    <div className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg space-y-3">
+    <div className="p-4 bg-gray-800 rounded-lg space-y-3">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+        <h3 className="text-sm font-medium text-gray-300">
           VRAM Budget
         </h3>
         {gpuName && (
-          <span className="text-sm text-gray-500 dark:text-gray-400">
+          <span className="text-sm text-gray-400">
             {gpuName}
           </span>
         )}
       </div>
 
       {/* Visual bar */}
-      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden flex">
+      <div className="h-6 bg-gray-700 rounded-full overflow-hidden flex">
         {/* Model weights */}
         <div
           className="bg-blue-500 h-full transition-all duration-300"
@@ -71,7 +71,7 @@ export function VRAMBreakdown({ breakdown, gpuName }: VRAMBreakdownProps) {
         />
         {/* Overhead */}
         <div
-          className="bg-gray-400 dark:bg-gray-500 h-full transition-all duration-300"
+          className="bg-gray-500 h-full transition-all duration-300"
           style={{
             width: `${Math.min(overheadPercent, 100 - modelPercent - kvPercent)}%`,
           }}
@@ -81,8 +81,8 @@ export function VRAMBreakdown({ breakdown, gpuName }: VRAMBreakdownProps) {
         {headroom_gb > 0 && (
           <div
             className={`h-full transition-all duration-300 ${safe
-                ? "bg-green-400 dark:bg-green-600"
-                : "bg-amber-400 dark:bg-amber-600"
+              ? "bg-green-400 dark:bg-green-600"
+              : "bg-amber-400 dark:bg-amber-600"
               }`}
             style={{ width: `${headroomBarPercent}%` }}
             title={`Headroom: ${headroom_gb} GB`}
@@ -94,32 +94,32 @@ export function VRAMBreakdown({ breakdown, gpuName }: VRAMBreakdownProps) {
       <div className="grid grid-cols-2 gap-2 text-xs">
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 bg-blue-500 rounded-sm" />
-          <span className="text-gray-600 dark:text-gray-400">
+          <span className="text-gray-400">
             Model: {model_weights_gb} GB
           </span>
         </div>
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 bg-purple-500 rounded-sm" />
-          <span className="text-gray-600 dark:text-gray-400">
+          <span className="text-gray-400">
             KV Cache: {kv_cache_gb} GB
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 bg-gray-400 dark:bg-gray-500 rounded-sm" />
-          <span className="text-gray-600 dark:text-gray-400">
+          <span className="w-3 h-3 bg-gray-500 rounded-sm" />
+          <span className="text-gray-400">
             Overhead: {overhead_gb} GB
           </span>
         </div>
         <div className="flex items-center gap-2">
           <span
             className={`w-3 h-3 rounded-sm ${headroom_gb > 0
-                ? safe
-                  ? "bg-green-400 dark:bg-green-600"
-                  : "bg-amber-400 dark:bg-amber-600"
-                : "bg-red-400 dark:bg-red-600"
+              ? safe
+                ? "bg-green-600"
+                : "bg-amber-600"
+              : "bg-red-600"
               }`}
           />
-          <span className="text-gray-600 dark:text-gray-400">
+          <span className="text-gray-400">
             Headroom: {headroom_gb} GB ({headroom_percent}%)
           </span>
         </div>
@@ -128,10 +128,10 @@ export function VRAMBreakdown({ breakdown, gpuName }: VRAMBreakdownProps) {
       {/* Status message */}
       <div
         className={`text-sm font-medium ${!fits
-            ? "text-red-600 dark:text-red-400"
-            : safe
-              ? "text-green-600 dark:text-green-400"
-              : "text-amber-600 dark:text-amber-400"
+          ? "text-red-400"
+          : safe
+            ? "text-green-400"
+            : "text-amber-400"
           }`}
       >
         {!fits ? (

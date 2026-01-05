@@ -97,7 +97,7 @@ export function ContextSlider({
 
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+      <label className="block text-sm font-medium text-gray-300 mb-1">
         Context Length
       </label>
 
@@ -126,18 +126,18 @@ export function ContextSlider({
               <div key={pos.value}>
                 {/* Tick Mark */}
                 <div
-                  className="absolute top-0 -translate-y-[24px] w-1 h-2 bg-gray-400 dark:bg-gray-600 z-0 transform -translate-x-1/2 pointer-events-none"
+                  className="absolute top-0 -translate-y-[24px] w-1 h-2 bg-gray-600 z-0 transform -translate-x-1/2 pointer-events-none"
                   style={{ left: `${percent}%` }}
                 />
 
                 {/* Label */}
                 <span
                   className={`absolute top-0 -translate-x-1/2 text-[10px] transition-colors ${positionStates[idx] === "unavailable"
-                    ? "text-gray-300 dark:text-gray-600"
+                    ? "text-gray-600"
                     : positionStates[idx] === "warning"
                       ? "text-amber-500"
-                      : "text-gray-500 dark:text-gray-400"
-                    } ${idx === localIndex ? "font-bold text-blue-600 dark:text-blue-400" : ""}`}
+                      : "text-gray-400"
+                    } ${idx === localIndex ? "font-bold text-blue-400" : ""}`}
                   style={{ left: `${percent}%` }}
                 >
                   {pos.label}
@@ -150,17 +150,17 @@ export function ContextSlider({
         {/* Current value and KV cache */}
         <div className="flex justify-between items-center text-sm">
           <div>
-            <span className="text-gray-600 dark:text-gray-400">Selected: </span>
-            <span className="font-medium text-gray-900 dark:text-gray-100">
+            <span className="text-gray-400">Selected: </span>
+            <span className="font-medium text-gray-100">
               {selectedPosition?.label ?? "8K"} tokens
             </span>
           </div>
           <div>
-            <span className="text-gray-600 dark:text-gray-400">KV Cache: </span>
+            <span className="text-gray-400">KV Cache: </span>
             <span
               className={`font-medium ${warnings.length > 0
-                ? "text-amber-600 dark:text-amber-400"
-                : "text-gray-900 dark:text-gray-100"
+                ? "text-amber-400"
+                : "text-gray-100"
                 }`}
             >
               {kvCacheGb.toFixed(2)} GB
@@ -174,7 +174,7 @@ export function ContextSlider({
             {warnings.map((warning, idx) => (
               <div
                 key={idx}
-                className="flex items-center gap-1 text-xs text-amber-600 dark:text-amber-400"
+                className="flex items-center gap-1 text-xs text-amber-400"
               >
                 <svg
                   className="w-4 h-4"

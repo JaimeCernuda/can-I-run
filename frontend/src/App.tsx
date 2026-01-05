@@ -43,18 +43,40 @@ export default function App() {
     // Update URL when view changes
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        if (view === 'about') {
-            params.set('view', 'about');
-        } else {
-            params.delete('view');
+        const currentView = params.get('view') === 'about' ? 'about' : 'home';
+
+        // Only push state if actual view mismatch to avoid loops
+        if (currentView !== view) {
+            if (view === 'about') {
+                params.set('view', 'about');
+            } else {
+                params.delete('view');
+            }
+            const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+            window.history.pushState({}, '', newUrl);
         }
-        const newUrl = `${window.location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
-        window.history.pushState({}, '', newUrl);
     }, [view]);
+
+    // Handle Back Button
+    useEffect(() => {
+        const handlePopState = () => {
+            const params = new URLSearchParams(window.location.search);
+            const newView = params.get('view') === 'about' ? 'about' : 'home';
+            setView(newView);
+        };
+
+        window.addEventListener('popstate', handlePopState);
+        return () => window.removeEventListener('popstate', handlePopState);
+    }, []);
 
     // GPU selection state
     const [selectedGpu, setSelectedGpu] = useState<GPU | null>(null);
     const [customVram, setCustomVram] = useState<number | null>(null);
+
+    // Search and Sort state
+    const [searchQuery, setSearchQuery] = useState("");
+    const [sortBy, setSortBy] = useState<'quality' | 'performance' | 'efficiency'>('quality');
+    const [visibleCount, setVisibleCount] = useState(12);
 
     // Context length state
     const [contextIndex, setContextIndex] = useState(2); // Default to 8K (index 2)
@@ -120,12 +142,29 @@ export default function App() {
         );
     }, [totalVram, selectedPoint, contextLength]);
 
-    // Get Pareto-optimal models sorted by quality
-    const paretoModels = useMemo(() => {
-        return chartPoints
-            .filter(p => p.is_pareto_quality || p.is_pareto_performance || p.is_pareto_efficiency)
-            .sort((a, b) => b.quality_score - a.quality_score);
-    }, [chartPoints]);
+    // Get Filtered and Sorted Models for the list
+    const filteredModels = useMemo(() => {
+        let models = chartPoints.filter(p => p.is_pareto_quality || p.is_pareto_performance || p.is_pareto_efficiency);
+
+        // Apply text search
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            models = models.filter(p => p.model_name.toLowerCase().includes(query));
+        }
+
+        // Apply sorting
+        return models.sort((a, b) => {
+            if (sortBy === 'quality') return b.quality_score - a.quality_score;
+            if (sortBy === 'performance') return b.tokens_per_second - a.tokens_per_second;
+            if (sortBy === 'efficiency') {
+                // Approximate efficiency as Quality * Speed / VRAM
+                const effA = (a.quality_score * a.tokens_per_second) / a.vram_required;
+                const effB = (b.quality_score * b.tokens_per_second) / b.vram_required;
+                return effB - effA;
+            }
+            return 0;
+        });
+    }, [chartPoints, searchQuery, sortBy]);
 
     // Count models per domain
     const domainCounts = useMemo(() => {
@@ -183,7 +222,7 @@ export default function App() {
                     </div>
                     <button
                         onClick={() => setView('about')}
-                        className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors border border-blue-500/30 px-3 py-1.5 rounded-lg hover:bg-blue-500/10"
+                        className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors border border-blue-900 px-3 py-1.5 rounded-lg hover:bg-blue-900/10"
                     >
                         How It Works
                     </button>
@@ -192,7 +231,7 @@ export default function App() {
 
             <main className="max-w-7xl mx-auto px-4 py-6 space-y-6">
                 {/* Filters Section */}
-                <section className="bg-gray-900/50 backdrop-blur-sm dark:bg-gray-900/50 rounded-lg border border-gray-700 p-6 space-y-8">
+                <section className="bg-gray-900/50 backdrop-blur-sm rounded-lg border border-gray-700 p-6 space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <GPUSelector
                             gpus={data.gpus}
@@ -226,9 +265,9 @@ export default function App() {
 
                     {/* Model Params Filter */}
                     <div>
-                        <div className="flex justify-between text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <div className="flex justify-between text-sm font-medium text-gray-300 mb-2">
                             <span>Model Size</span>
-                            <span className="text-blue-600 dark:text-blue-400">
+                            <span className="text-blue-400">
                                 {MODEL_SIZE_POINTS[paramRangeIndices.min]}B - {
                                     paramRangeIndices.max === MODEL_SIZE_POINTS.length - 1
                                         ? "Any"
@@ -252,9 +291,9 @@ export default function App() {
                     </div>
 
                     {totalVram > 0 && (
-                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="text-sm text-gray-400">
                             Available for model:{" "}
-                            <span className="font-semibold text-gray-900 dark:text-gray-100">
+                            <span className="font-semibold text-gray-100">
                                 {(totalVram - 0.5).toFixed(1)} GB
                             </span>
                             <span className="mx-2">|</span>
@@ -296,13 +335,45 @@ export default function App() {
                 )}
 
                 {/* Pareto-Optimal Model Cards */}
-                {paretoModels.length > 0 && (
+                {filteredModels.length > 0 && (
                     <section className="space-y-4">
-                        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                            Recommended Models ({paretoModels.length})
-                        </h2>
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <h2 className="text-lg font-semibold text-gray-100">
+                                Recommended Models ({filteredModels.length})
+                            </h2>
+                            <div className="flex flex-wrap gap-2">
+                                <input
+                                    type="text"
+                                    placeholder="Search models..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="px-3 py-1.5 text-sm bg-gray-800 border border-gray-600 rounded-lg text-gray-100 focus:outline-none focus:border-blue-500"
+                                />
+                                <div className="flex bg-gray-800 border border-gray-600 rounded-lg overflow-hidden">
+                                    <button
+                                        onClick={() => setSortBy('quality')}
+                                        className={`px-3 py-1.5 text-xs font-medium transition-colors ${sortBy === 'quality' ? 'bg-blue-900 text-blue-300' : 'text-gray-400 hover:bg-gray-700'}`}
+                                    >
+                                        Quality
+                                    </button>
+                                    <button
+                                        onClick={() => setSortBy('performance')}
+                                        className={`px-3 py-1.5 text-xs font-medium border-l border-gray-600 transition-colors ${sortBy === 'performance' ? 'bg-green-900 text-green-300' : 'text-gray-400 hover:bg-gray-700'}`}
+                                    >
+                                        Speed
+                                    </button>
+                                    <button
+                                        onClick={() => setSortBy('efficiency')}
+                                        className={`px-3 py-1.5 text-xs font-medium border-l border-gray-600 transition-colors ${sortBy === 'efficiency' ? 'bg-amber-900 text-amber-300' : 'text-gray-400 hover:bg-gray-700'}`}
+                                    >
+                                        Efficiency
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {paretoModels.slice(0, 12).map((point, idx) => (
+                            {filteredModels.slice(0, visibleCount).map((point, idx) => (
                                 <ModelCard
                                     key={point.id}
                                     point={point}
@@ -312,16 +383,22 @@ export default function App() {
                                 />
                             ))}
                         </div>
-                        {paretoModels.length > 12 && (
-                            <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
-                                Showing top 12 of {paretoModels.length} Pareto-optimal models
-                            </p>
+
+                        {filteredModels.length > visibleCount && (
+                            <div className="flex justify-center pt-4">
+                                <button
+                                    onClick={() => setVisibleCount(c => c + 12)}
+                                    className="px-6 py-2 text-sm font-medium text-blue-300 bg-blue-900/30 border border-blue-900/50 rounded-lg hover:bg-blue-900/50 transition-colors"
+                                >
+                                    Load More Models ({filteredModels.length - visibleCount} remaining)
+                                </button>
+                            </div>
                         )}
                     </section>
                 )}
 
                 {/* Footer */}
-                <footer className="text-center text-sm text-gray-500 dark:text-gray-400 py-4 border-t border-gray-200 dark:border-gray-700">
+                <footer className="text-center text-sm text-gray-400 py-4 border-t border-gray-800">
 
                 </footer>
             </main>

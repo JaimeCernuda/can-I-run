@@ -97,12 +97,12 @@ export function DualRangeSlider({
 
     return (
         <div className="relative w-full h-12 flex items-center select-none">
-            <div ref={trackRef} className="relative w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full">
+            <div ref={trackRef} className="relative w-full h-1.5 bg-gray-700 rounded-full">
                 {/* Step Ticks */}
                 {steps && steps.map((_, index) => (
                     <div
                         key={index}
-                        className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-gray-400 dark:bg-gray-600 rounded-full z-0 transform -translate-x-1/2"
+                        className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-gray-600 rounded-full z-0 transform -translate-x-1/2"
                         style={{ left: `${(index / (steps.length - 1)) * 100}%` }}
                     />
                 ))}

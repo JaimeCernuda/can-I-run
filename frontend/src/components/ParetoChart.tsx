@@ -224,8 +224,8 @@ export function ParetoChart({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-      <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+    <div className="bg-gray-800 rounded-lg p-4 border border-gray-700">
+      <h3 className="text-sm font-medium text-gray-300 mb-2">
         {config.title}
       </h3>
 
@@ -238,11 +238,12 @@ export function ParetoChart({
             name="VRAM"
             domain={[0, maxVram]}
             tickFormatter={(v) => `${v}GB`}
+            tick={{ fill: "#9ca3af", fontSize: 11 }}
             label={{
               value: "VRAM (GB)",
               position: "bottom",
               offset: 0,
-              style: { fontSize: 12, fill: "#6b7280" },
+              style: { fontSize: 12, fill: "#9ca3af" },
             }}
           />
           <YAxis
@@ -250,12 +251,13 @@ export function ParetoChart({
             dataKey="y"
             name={config.yLabel}
             tickFormatter={(v) => config.formatY(v)}
+            tick={{ fill: "#9ca3af", fontSize: 11 }}
             label={{
               value: config.yLabel,
               angle: -90,
               position: "left",
               offset: 10,
-              style: { fontSize: 12, fill: "#6b7280" },
+              style: { fontSize: 12, fill: "#9ca3af" },
             }}
           />
           <Tooltip content={<CustomTooltip />} />
@@ -296,7 +298,7 @@ export function ParetoChart({
       </ResponsiveContainer>
 
       {/* Legend */}
-      <div className="mt-2 flex flex-wrap gap-3 text-xs text-gray-500 dark:text-gray-400">
+      <div className="mt-2 flex flex-wrap gap-3 text-xs text-gray-400">
         <div className="flex items-center gap-1">
           <span className="w-2.5 h-2.5 bg-blue-500 rounded-full" />
           Dense
